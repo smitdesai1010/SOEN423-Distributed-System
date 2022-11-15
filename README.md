@@ -4,23 +4,15 @@
 
 
 
-<h2 style="text-align: center;">SOEN 423: Distributed Systems</h2>
+## SOEN 423: Distributed Systems
 
-<h3 style="text-align: center;">Fall 2022</h3>
-
-<div style="text-align: center;">
-    Smit Desai (40120178)
-    Adrien Tremblay (40108982)
-    Ekamjot Singh (40106849)
-    Efe Harmankaya (40077277)
-</div>
+#### Fall 2022
 
 
-
-
-# 
-[TOC]
-# 
+- Smit Desai (40120178)
+- Adrien Tremblay (40108982)
+- Ekamjot Singh (40106849)
+- Efe Harmankaya (40077277)
 
 
 # **Introduction**
@@ -65,43 +57,29 @@ Replication is a key technique used in distributed systems to help support a num
 
 It stands for User Datagram Protocol and is used for network communication across the global internet. This communication is connectionless, i.e the client-server does not need a connection established to exchange data. The client only requires the server's IP address and port number to send a request. The server, on the other hand, listens for incoming requests on the registered port. The data transmitted is broken down into smaller datagrams which contain the source and destination information, headers and the actual data (body). UDP requires less overhead and is faster than TCP. However, 
 
+- UDP is not reliable 
 
-    - UDP is not reliable 
+- UDP does-not provide ordered delivery 
 
+- UDP has no flow and congestion control 
 
-    - UDP does-not provide ordered delivery 
-
-
-    - UDP has no flow and congestion control 
-
-
-    - UDP does-not provide error handling mechanisms
+- UDP does-not provide error handling mechanisms
 
 
 ## SOAP
 
 It stands for Simple Object Access Protocol and is used for exchanging data in the form of webservices in a distributed application. SOAP messages are written entirely in XML and are platform and language independent.
 
-**System Architecture**
 
+# System Architecture
 
-## 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
+![](System-Architecture-Images/System-Design.png)
 
 
 
 ## **Data-Flow Diagram**
 
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
+![](System-Architecture-Images/Data-Flow-Diagram.png)
 
 
 
@@ -134,16 +112,12 @@ An individual replica represents an atomic replicated copy of a system component
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
+![](System-Architecture-Images/Activity-Diagram.png)
 
 The above sequence diagram shows the flow for detecting faulty replicas and responding accordingly.
 
 
-# **Team and Individual Tasks**
+# Team and Individual Tasks
 
 
 <table>
@@ -156,33 +130,33 @@ The above sequence diagram shows the flow for detecting faulty replicas and resp
    </td>
   </tr>
   <tr>
-   <td>40108982
+   <td>40120178
    </td>
-   <td>Adrien Tremblay
+   <td>Smit Desai
    </td>
    <td>Front End
    </td>
   </tr>
   <tr>
-   <td>40077277
+   <td>40108982
    </td>
-   <td>Efe Harmankaya
+   <td>Adrien Tremblay
    </td>
-   <td>Replica Manager
+   <td>Replica Manager + Replica
    </td>
   </tr>
   <tr>
    <td>40106849
    </td>
-   <td>Smit Desai
+   <td>Ekamjot Singh
    </td>
    <td>Sequencer
    </td>
   </tr>
   <tr>
-   <td>40120178
+   <td>40106849
    </td>
-   <td>Ekamjot Singh
+   <td> Ekamjot Singh
    </td>
    <td>Test Cases
    </td>
@@ -193,75 +167,75 @@ The above sequence diagram shows the flow for detecting faulty replicas and resp
 
 # **Test Scenarios**
 
-Test Case 1.  List available reservations 
+    Test Case 1.  List available reservations 
 
-Result Expected: Should print all the available reservations successfully.
+    Result Expected: Should print all the available reservations successfully.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 2. Add an new event slot 
+    Test Case 2. Add an new event slot 
 
-Result Expected: The new event slot should be added successfully. 
+    Result Expected: The new event slot should be added successfully. 
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 3. Add the same event again
+    Test Case 3. Add the same event again
 
-Result Expected: The event should not be added.
+    Result Expected: The event should not be added.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 4. Book an event slot
+    Test Case 4. Book an event slot
 
-Result Expected: The user could book the slot successfully. 
+    Result Expected: The user could book the slot successfully. 
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 5. Book an same event slot again
+    Test Case 5. Book an same event slot again
 
-Result Expected: The slot should not be booked again.
+    Result Expected: The slot should not be booked again.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 6. Cancel Ticket (with valid ticket)
+    Test Case 6. Cancel Ticket (with valid ticket)
 
-Result Expected: The tickets should be cancelled successfully.
+    Result Expected: The tickets should be cancelled successfully.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 7. Cancel Ticket (with invalid ticket)
+    Test Case 7. Cancel Ticket (with invalid ticket)
 
-Result Expected: The tickets should not be cancelled and the proper message
+    Result Expected: The tickets should not be cancelled and the proper message
 
-                             Should be either logged and/or displayed to the user.
+    Should be either logged and/or displayed to the user.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 8. Exchange tickets (with valid tickets)
+    Test Case 8. Exchange tickets (with valid tickets)
 
-Result Expected: should successfully exchange tickets 
+    Result Expected: should successfully exchange tickets 
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 9. Exchange tickets (with invalid tickets)
+    Test Case 9. Exchange tickets (with invalid tickets)
 
-Result Expected: should not exchange tickets.
+    Result Expected: should not exchange tickets.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 10: Software Failure Detection
+    Test Case 10: Software Failure Detection
 
-Result Expected: The software failure should be detected and the replica should be killed.
+    Result Expected: The software failure should be detected and the replica should be killed.
 
-Result Obtained: 
+    Result Obtained: 
 
-Test Case 11: Software Crash Detection
+    Test Case 11: Software Crash Detection
 
-Result Expected: The Software Crash should be detected and the crashed replica should 
+    Result Expected: The Software Crash should be detected and the crashed replica should 
 
-                             be restarted.
+    be restarted.
 
-Result Obtained: 
+    Result Obtained: 
 
 
 # Sources
@@ -273,31 +247,18 @@ Result Obtained:
 
 ## Work Distribution:
 
-Smit: 
+- Smit: 
+    * Frontend
 
+- Ekamjot:
+    * Sequencer
 
-
-* Refactor Replica
-* Frontend
-
-Ekam:
-
-
-
-* Refactor Replica
-* Sequencer
-
-Adrien: 
-
-
-
-* Refactor Replica
-    * Also use String instead of enums
-* Replica Manager
+- Adrien: 
+    * Refactor Replica
+        * Also use String instead of enums
+    * Replica Manager
 
 Other work:
-
-
 
 * Client
 * Setting up LAN
@@ -317,124 +278,77 @@ Other work:
         * Concerts
         * Theatre
 * jsonFormat
-
+```
     {
-
-
     	methodName: xxx,
-
-
     	paramName: value,
-
-
     	paramNam2: etc…,
-
-
     }
+```
 
 
-
-## Replica Function Signatures
-
+#### Replica Function Signatures
+```
 {
-
-	“MethodName”: “addReservationSlot”,
-
-	“adminID”: “String”,
-
-“eventType”: “String”,
-
-“eventID”: “String”,
-
-“capacity”: “int”,
-
+    “MethodName”: “addReservationSlot”,
+    “adminID”: “String”,
+    “eventType”: “String”,
+    “eventID”: “String”,
+    “capacity”: “int”,
 },
 
 {
-
-	“MethodName”: “removeReservationSlot”,
-
-	“adminID”: “String”,
-
-“eventType”: “String”,
-
-“eventID”: “String”,
-
+    “MethodName”: “removeReservationSlot”,
+    “adminID”: “String”,
+    “eventType”: “String”,
+    “eventID”: “String”,
 },
 
 {
-
-	“MethodName”: “listReservationSlotAvailable”,
-
-	“adminID”: “String”,
-
-“eventType”: “String”,
-
+    “MethodName”: “listReservationSlotAvailable”,
+    “adminID”: “String”,
+    “eventType”: “String”,
 },
 
 {
-
-	“MethodName”: “reserveTicket”,
-
-	“participantID”: “String”,
-
-“eventType”: “String”,
-
-“eventID”: “String”,
-
+    “MethodName”: “reserveTicket”,
+    “participantID”: “String”,
+    “eventType”: “String”,
+    “eventID”: “String”,
 },
 
 {
-
-	“MethodName”: “getEventSchedule”,
-
-	“participantID”: “String”,
-
+    “MethodName”: “getEventSchedule”,
+    “participantID”: “String”,
 },
 
 {
-
-	“MethodName”: “cancelTicket”,
-
-	“participantID”: “String”,
-
-“eventType”: “String”,
-
-“eventID”: “String”,
-
+    “MethodName”: “cancelTicket”,
+    “participantID”: “String”,
+    “eventType”: “String”,
+    “eventID”: “String”,
 },
 
 {
-
-	“MethodName”: “exchangeTicket”,
-
-	“participantID”: “String”,
-
-“eventType”: “String”,
-
-“eventID”: “String”,
-
-“new_eventType”: “String”,
-
-“new_eventID”: “String”,
-
+    “MethodName”: “exchangeTicket”,
+    “participantID”: “String”,
+    “eventType”: “String”,
+    “eventID”: “String”,
+    “new_eventType”: “String”,
+    “new_eventID”: “String”,
 },
 
+```
+#### Replica Function Return Type:
 
-## Replica Function Return Type:
-
+```
 {
-
-	“Success” : “Boolean”,
-
-	“Data” : “String”
-
+    “Success” : “Boolean”,
+    “Data” : “String”
 }
-
+```
 
 ## Replica Manager:
-
-
 
 * Create a UDP Client and Server
 * Integration with replicas
@@ -450,8 +364,6 @@ Other work:
 
 ## Front-End:
 
-
-
 * Create a UDP Client and Server
 * Handle web-service requests from client
 * Create a message to send to the sequencer
@@ -464,16 +376,12 @@ Other work:
 
 ## Sequencer:
 
-
-
 * Add sequence # to request
 * Multicast to RM
 * If received incorrect ACK, then resend that packet
 
 
-## **Meeting notes:**
-
-
+## Meeting notes:
 
 * Use existing client implementation from one of the member’s codebase (just change the endpoint to the FE)
 * Each person will have to refactor their replica code to work with UDP instead of web services
