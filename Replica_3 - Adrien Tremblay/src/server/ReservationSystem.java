@@ -6,8 +6,6 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import java.rmi.RemoteException;
 
-@WebService
-@SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface ReservationSystem {
     public int requestClientNumber() throws RemoteException;
 

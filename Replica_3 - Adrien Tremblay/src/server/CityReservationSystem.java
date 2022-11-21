@@ -16,8 +16,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-@WebService(endpointInterface =  "server.ReservationSystem")
-@SOAPBinding(style = SOAPBinding.Style.RPC)
 public class CityReservationSystem implements ReservationSystem {
     private static int nextClientNumber = 0;
     private City city;
