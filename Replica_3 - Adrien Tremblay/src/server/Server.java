@@ -3,7 +3,7 @@ package server;
 import general.City;
 
 public class Server {
-    private static final String USAGE_MESSAGE = "Usage: server [montreal/toronto/vancouver]";
+    private static final String USAGE_MESSAGE = "Usage: server [MONTREAL/TORONTO/VANCOUVER]";
 
     public static void main(String args[]) {
         if (args.length == 0) {
@@ -21,7 +21,7 @@ public class Server {
             return;
         }
 
-        System.out.println("I am a " + city.name() + "server! ~uwU!!");
+        System.out.println("I am a " + city.name() + " server! ~uwU!!");
 
         // ReservationSystem reservationSystem = new CityReservationSystem(city);
     }
