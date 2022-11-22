@@ -10,11 +10,11 @@ import java.nio.charset.StandardCharsets;
 
 public class UDPClient {
 
-    public String call(JSONObject jsonObj, int port) {
+    public String call(JSONObject jsonObj, String IP, int port) {
         try (DatagramSocket aSocket = new DatagramSocket()) {
 
             byte[] data = jsonObj.toJSONString().getBytes(StandardCharsets.UTF_8);
-            InetAddress aHost = InetAddress.getByName("localhost");
+            InetAddress aHost = InetAddress.getByName(IP);
 
             DatagramPacket request = new DatagramPacket(data, data.length, aHost, port);
             aSocket.send(request);
