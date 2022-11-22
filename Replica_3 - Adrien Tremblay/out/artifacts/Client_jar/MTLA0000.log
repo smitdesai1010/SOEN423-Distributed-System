@@ -1,0 +1,16 @@
+Oct 18, 2022 2:55:12 PM client.Client handleCommand
+INFO: Successfully added a reservation slot for event id (MTLM011022) of type (ART_GALLERY)
+Oct 18, 2022 2:55:41 PM client.Client handleCommand
+WARNING: (listReservationSlots) is not a command!
+Oct 18, 2022 2:56:23 PM client.Client handleCommand
+INFO: Displaying Reservation Slots...
+ART_GALLERYS: MTLM111122 3, MTLE011022 1, MTLA111022 10, MTLM011022 7.
+Successfully displayed all available reservation slots available
+Oct 18, 2022 2:57:23 PM client.Client handleCommand
+INFO: Displaying Reservation Slots...
+ART_GALLERYS: TORA011022 10, TORA041022 10, TORA021022 10, TORA031022 10, TORM111122 4.MTLM111122 3, MTLE011022 1, MTLA111022 10, MTLM011022 7.
+Successfully displayed all available reservation slots available
+Oct 18, 2022 2:58:35 PM client.Client handleCommand
+INFO: Displaying Reservation Slots...
+ART_GALLERYS: TORA011022 10, TORA041022 10, TORA021022 10, TORA031022 10, TORM111122 4.MTLM111122 3, MTLE011022 1, MTLA111022 10, MTLM011022 7.
+Successfully displayed all available reservation slots available

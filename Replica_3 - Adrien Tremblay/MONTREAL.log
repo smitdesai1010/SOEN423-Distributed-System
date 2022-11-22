@@ -1,0 +1,8 @@
+Nov 05, 2022 10:29:54 AM server.CityReservationSystem logRecord
+INFO: Request listReservationSlotsAvailable(ART_GALLERY) SUCCEEDED!
+Response:
+ART_GALLERYS: MTLM111122 3, MTLE011022 1, MTLA111022 10, TORA011022 10, TORA041022 10, TORA021022 10, TORA031022 10, TORM111122 4.
+Nov 05, 2022 10:29:54 AM client.User handleCommand
+INFO: Displaying Reservation Slots...
+ART_GALLERYS: MTLM111122 3, MTLE011022 1, MTLA111022 10, TORA011022 10, TORA041022 10, TORA021022 10, TORA031022 10, TORM111122 4.
+Successfully displayed all available reservation slots available
