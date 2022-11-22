@@ -41,12 +41,6 @@ public class CityReservationSystem implements ReservationSystem {
         }
 
         (new UdpServerThread(this)).start();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override

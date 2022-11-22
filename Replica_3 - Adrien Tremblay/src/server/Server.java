@@ -21,8 +21,10 @@ public class Server {
             return;
         }
 
-        System.out.println("I am a " + city.name() + " server! ~uwU!!");
+        ReservationSystem reservationSystem = new CityReservationSystem(city);
 
-        // ReservationSystem reservationSystem = new CityReservationSystem(city);
+        while (true) {
+
+        }
     }
 }
