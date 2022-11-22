@@ -9,7 +9,6 @@ import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 
 public class UDPClient {
-
     public String call(JSONObject jsonObj, String IP, int port) {
         try (DatagramSocket aSocket = new DatagramSocket()) {
 
