@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Sequencer.Sequencer;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -23,8 +24,15 @@ public class ServerImplementation implements ServerInterface {
             //Timeout?
         //send back one response to client
 
-        // sequencer.multicast(obj);
+        Sequencer seq = new Sequencer();
+        boolean multicastResult = seq.multicast(obj);
+
+        if (!multicastResult) {
+            return "Internal Server error";
+        }
+
         JSONObject[] responseData = listenForResponse(1000);
+
 
         return "";
     }
@@ -45,6 +53,8 @@ public class ServerImplementation implements ServerInterface {
 
                 String requestString = new String(request.getData()).trim();
                 JSONObject requestObject = (JSONObject) parser.parse(requestString);
+
+                //store client ip and port number
 
                 responseData[ctr] = requestObject;
                 ++ctr;
