@@ -12,7 +12,7 @@ Compile `Client.java` using javac with the provided `json-simple-1.1.jar` jar fi
 Running the Client server
 
 ```
-> java Client
+> java -cp ../lib/json-simple-1.1.jar: Client
 ```
 
 TODO others
