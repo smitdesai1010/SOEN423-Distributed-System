@@ -41,6 +41,7 @@ public class ReplicaManager {
         // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
         //Thread.sleep(1000);
 
+        /*
         JSONObject samplePayload = new JSONObject();
         samplePayload.put("MethodName", "reserveTicket");
         samplePayload.put("participantID", "MTLP0000");
@@ -49,9 +50,9 @@ public class ReplicaManager {
 
         JSONObject response = handleFrontEndObject(samplePayload);
         System.out.println(response.toJSONString());
+         */
 
         // sending and receiving requests
-        /*
         InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
         MulticastSocket udpSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
         udpSocket.joinGroup(group);
@@ -65,10 +66,16 @@ public class ReplicaManager {
             JSONParser jsonParser = new JSONParser();
             JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
 
-            // todo: parse frontEndRequestObject and send and turn message
+            JSONObject replyObject = handleFrontEndObject(frontEndRequestObject);
+            final byte[] replyObjectData = replyObject.toJSONString().getBytes();
+
+            // Create a packet for the reply
+            DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, frontEndRequestPacket.getAddress(), frontEndRequestPacket.getPort());
+            // Send the reply
+            udpSocket.send(serverReplyPacket);
+
             break;
         }
-         */
 
         System.out.println("all done");
     }
