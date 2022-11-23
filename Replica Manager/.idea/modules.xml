@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ReplicaManager.iml" filepath="$PROJECT_DIR$/ReplicaManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Replica Manager.iml" filepath="$PROJECT_DIR$/Replica Manager.iml" />
     </modules>
   </component>
 </project>

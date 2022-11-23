@@ -1,0 +1,6 @@
+Nov 23, 2022 10:28:42 AM server.Server main
+INFO: test2
+Nov 23, 2022 10:28:42 AM server.CityReservationSystem logRecord
+INFO: Request reserveTicket(MTLP0000, MTLA111022, ART_GALLERY) SUCCEEDED!
+Response:
+true

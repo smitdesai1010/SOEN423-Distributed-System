@@ -8,10 +8,23 @@ import java.net.*;
 
 public class ReplicaManager {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
-        if (args.length != 4)  {
+        if (args.length != 5)  {
            System.out.println("Please provide ports for the RM, and all the three replicas");
-           System.out.println("Usage: replica_manager [rm_port] [montreal_port] [toronto_port] [vancouver_port]");
+           System.out.println("Usage: replica_manager [replica_implementation_num] [rm_port] [montreal_port] [toronto_port] [vancouver_port]");
            return;
+        }
+
+        int replicaImplementationNum;
+        try {
+            replicaImplementationNum = Integer.valueOf(args[0]);
+        } catch (NumberFormatException e) {
+            System.out.println("Implementation number could not be formatted as an integer");
+            return;
+        }
+
+        if (replicaImplementationNum <= 0 || replicaImplementationNum >= 4) {
+            System.out.println("Please select an implementation number between 1-3");
+            return;
         }
 
         int replicaManagerPort;
@@ -19,19 +32,19 @@ public class ReplicaManager {
         int replicaTorontoPort;
         int replicaVancouverPort;
         try {
-            replicaManagerPort = Integer.valueOf(args[0]);
-            replicaMontrealPort = Integer.valueOf(args[1]);
-            replicaTorontoPort = Integer.valueOf(args[2]);
-            replicaVancouverPort = Integer.valueOf(args[3]);
+            replicaManagerPort = Integer.valueOf(args[1]);
+            replicaMontrealPort = Integer.valueOf(args[2]);
+            replicaTorontoPort = Integer.valueOf(args[3]);
+            replicaVancouverPort = Integer.valueOf(args[4]);
         } catch (NumberFormatException e) {
             System.out.println("One of the ports could not be formatted as an integer");
             return;
         }
 
         // spawning a replica for each city
-        Process montrealReplica = createReplica("MONTREAL", replicaMontrealPort);
-        Process torontoReplica = createReplica("TORONTO", replicaTorontoPort);
-        Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort);
+        Process montrealReplica = createReplica("MONTREAL", replicaMontrealPort, replicaImplementationNum);
+        Process torontoReplica = createReplica("TORONTO", replicaTorontoPort, replicaImplementationNum);
+        Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort, replicaImplementationNum);
 
         // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
         Thread.sleep(1000);
@@ -86,12 +99,12 @@ public class ReplicaManager {
         return replyObject;
     }
 
-    private static Process createReplica(String cityName, int port) {
+    private static Process createReplica(String cityName, int port, int implementationNumber) {
         ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica.jar",  cityName, String.valueOf(port));
         pb.redirectErrorStream(true);
-        File log = new File(cityName + ".log");
+        File log = new File("logs/" + cityName + ".log");
         pb.redirectOutput(log);
-        File f = new File("replicaJar");
+        File f = new File("replica_implementations/impl" + String.valueOf(implementationNumber));
         pb.directory(f);
         Process process;
         try {
