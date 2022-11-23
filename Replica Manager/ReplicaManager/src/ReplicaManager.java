@@ -30,10 +30,11 @@ public class ReplicaManager {
 
         // spawning a replica for each city
         Process montrealReplica = createReplica("MONTREAL", replicaMontrealPort);
-        //Process torontoReplica = createReplica("TORONTO", replicaTorontoPort);
-        //Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort);
+        Process torontoReplica = createReplica("TORONTO", replicaTorontoPort);
+        Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort);
 
         // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
+        Thread.sleep(1000);
 
         // sending and receiving requests
 
