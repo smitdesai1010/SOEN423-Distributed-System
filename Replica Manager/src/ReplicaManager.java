@@ -47,7 +47,7 @@ public class ReplicaManager {
         samplePayload.put("eventType", "ArtGallery");
         samplePayload.put("eventID", "MTLA111022");
 
-        JSONObject response = sendMessageToLocalHost(MONTREAL_REPLICA_PORT, samplePayload);
+        JSONObject response = handleFrontEndObject(samplePayload);
         System.out.println(response.toJSONString());
 
         // sending and receiving requests
@@ -108,5 +108,36 @@ public class ReplicaManager {
             throw new RuntimeException(e);
         }
         return  process;
+    }
+
+    private static JSONObject handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
+        String cityPrefix;
+
+        if (frontEndObject.containsKey(jsonFieldNames.ADMIN_ID)) {
+            cityPrefix = ((String) frontEndObject.get(jsonFieldNames.ADMIN_ID)).substring(0, 3);
+        } else if (frontEndObject.containsKey(jsonFieldNames.PARTICIPANT_ID)) {
+            cityPrefix = ((String) frontEndObject.get(jsonFieldNames.PARTICIPANT_ID)).substring(0, 3);
+        } else {
+            System.out.println("There is no participant or admin ID. Failed to identify which server to send the request to");
+            return null;
+        }
+
+        int cityPort;
+        switch (cityPrefix) {
+            case "MTL":
+                cityPort = MONTREAL_REPLICA_PORT;
+                break;
+            case "TOR":
+                cityPort = TORONTO_REPLICA_PORT;
+                break;
+            case "VAN":
+                cityPort = VANCOUVER_REPLICA_PORT;
+                break;
+            default:
+                System.out.println("Something went wrong parsing the city prefix");
+                return null;
+        }
+
+        return sendMessageToLocalHost(cityPort, frontEndObject);
     }
 }

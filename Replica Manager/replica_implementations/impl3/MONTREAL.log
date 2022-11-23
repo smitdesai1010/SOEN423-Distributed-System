@@ -8,3 +8,7 @@ Nov 23, 2022 4:51:49 PM server.Server main
 INFO: test2
 Nov 23, 2022 4:51:49 PM server.CityReservationSystem reserveTicket
 SEVERE: You cannot reserve more than one event of the same type in the same day
+Nov 23, 2022 5:09:40 PM server.Server main
+INFO: test2
+Nov 23, 2022 5:09:40 PM server.CityReservationSystem reserveTicket
+SEVERE: You cannot reserve more than one event of the same type in the same day

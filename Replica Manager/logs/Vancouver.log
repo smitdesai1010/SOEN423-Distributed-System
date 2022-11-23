@@ -8,5 +8,5 @@ Caused by: java.net.BindException: Address already in use (Bind failed)
 	at java.net.DatagramSocket.<init>(DatagramSocket.java:299)
 	at java.net.DatagramSocket.<init>(DatagramSocket.java:271)
 	at server.UdpServerThread.run(UdpServerThread.java:29)
-Nov 23, 2022 4:51:49 PM server.Server main
+Nov 23, 2022 5:09:40 PM server.Server main
 SEVERE: socket error
