@@ -10,6 +10,8 @@ import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class ServerImplementation implements ServerInterface {
     @Override
     public String executeRequest(JSONObject obj) {
         //TODO: Create port number dynamically
+        //TODO: Pass the dynamic PORT number to the sequencer along with the data
+
+        System.out.println("RECEIVED REQUEST");
 
         Sequencer seq = new Sequencer();
         boolean multicastResult = seq.multicast(obj);
@@ -103,13 +108,25 @@ public class ServerImplementation implements ServerInterface {
         return responseData.toArray(new JSONObject[0]);
     }
 
-    //TODO: Implementation
-    public void sendUDPMessage(String IP, int PORT, JSONObject data) {
 
+    public void sendUDPMessage(String IP, int PORT, JSONObject JSONData) {
+
+        try (DatagramSocket aSocket = new DatagramSocket()) {
+            byte[] byteData = JSONData.toJSONString().getBytes(StandardCharsets.UTF_8);
+
+            InetAddress aHost = InetAddress.getByName(IP);
+            DatagramPacket request = new DatagramPacket(byteData, byteData.length, aHost, PORT);
+            aSocket.send(request);
+
+            //TODO: Wait for receiving the response?
+        }
+        catch (IOException e) {
+            System.out.println("Exception in UDP-Client: " + e.getMessage());
+        }
     }
 }
 
-// use dynamic port number
+// Send back data to the port number sent in request
 // what message to send on failure or crash(timeout) detection
 
 // use multicastpublisher
