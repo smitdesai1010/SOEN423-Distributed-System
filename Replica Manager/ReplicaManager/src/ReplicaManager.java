@@ -46,14 +46,13 @@ public class ReplicaManager {
 
         JSONObject samplePayload = new JSONObject();
         samplePayload.put("MethodName", "reserveTicket");
-        samplePayload.put("participantID", "1234");
+        samplePayload.put("participantID", "MTLP0000");
         samplePayload.put("eventType", "ArtGallery");
-        samplePayload.put("eventID", "1234");
-        System.out.println("sending da message");
-        System.out.println(replica3.isAlive());
+        samplePayload.put("eventID", "MTLA111022");
 
-        sendMessageToLocalHost(replicaMontrealPort, samplePayload);
-        System.out.println("all done");
+        JSONObject response = sendMessageToLocalHost(replicaMontrealPort, samplePayload);
+
+        System.out.println(response.toJSONString());
 
         /**
         while (true) {

@@ -8,3 +8,17 @@ Nov 23, 2022 12:32:26 AM server.Server main
 INFO: test2
 Nov 23, 2022 12:32:26 AM server.CityReservationSystem reserveTicket
 SEVERE: Failed to reserve ticket. (123) is not a valid city acronym!
+Nov 23, 2022 12:34:31 AM server.Server main
+INFO: test2
+Nov 23, 2022 12:34:31 AM server.CityReservationSystem reserveTicket
+SEVERE: Failed to reserve ticket. (123) is not a valid city acronym!
+Nov 23, 2022 12:40:34 AM server.Server main
+INFO: test2
+Nov 23, 2022 12:40:34 AM server.CityReservationSystem reserveTicket
+SEVERE: Failed to reserve ticket. (123) is not a valid city acronym!
+Nov 23, 2022 12:44:01 AM server.Server main
+INFO: test2
+Nov 23, 2022 12:44:02 AM server.CityReservationSystem logRecord
+INFO: Request reserveTicket(MTLP0000, MTLA111022, ART_GALLERY) SUCCEEDED!
+Response:
+true
