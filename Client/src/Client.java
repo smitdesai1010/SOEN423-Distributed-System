@@ -13,20 +13,21 @@ import javax.xml.ws.WebServiceException;
 import org.json.simple.JSONObject;
 
 public class Client {
-    final static String errorMessage = "Invalid input - Please try again.";
+    final static String errorMessage = "Invalid input - Please try again.\n";
     static InputStreamReader is = new InputStreamReader(System.in);
     static BufferedReader br = new BufferedReader(is);
 
+    String userId;
+
     public static void main(String[] args) {
         try {
-            String userId = promptUserId();
-            new Client().start(userId);
+            new Client().start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static String promptUserId() {
+    public String promptUserId() {
         String userId = null;
         boolean isValid = false;
 
@@ -112,7 +113,8 @@ public class Client {
         return input;
     }
 
-    public void start(String userId) {
+    public void start() {
+        userId = promptUserId();
         // TODO get server implementation
         ServerInterface x; // ! temp
         String connectedServer = "MTL"; // TODO connectedServer
@@ -120,14 +122,12 @@ public class Client {
         boolean running = input == null;
         while (running) {
             // TODO check with team to obtain user options from the server (ie.
-            // getUserOptions(String userId) -> String)
             if (input == null) // initial load -> show welcome message
                 System.out.println(
                         String.format("Welcome %s\nConnected Server: %s\n===============", userId, connectedServer));
 
             input = getUserInput();
-
-            if (input == "exit") {
+            if (input.equalsIgnoreCase("exit")) {
                 running = false;
                 break;
             }
@@ -137,6 +137,32 @@ public class Client {
 
             executeRequest(input);
         }
+    }
+
+    enum MethodName {
+        addReservationSlot,
+        removeReservationSlot,
+        listReservationSlotAvailable,
+        reserveTicket,
+        getEventSchedule,
+        cancelTicket,
+        exchangeTicket;
+    };
+
+    private HashMap<String, MethodName> methodNames = new HashMap<String, MethodName>() {
+        {
+            put("add", MethodName.addReservationSlot);
+            put("remove", MethodName.removeReservationSlot);
+            put("list", MethodName.listReservationSlotAvailable);
+            put("reserve", MethodName.reserveTicket);
+            put("get", MethodName.getEventSchedule);
+            put("cancel", MethodName.cancelTicket);
+            put("exchange", MethodName.exchangeTicket);
+        }
+    };
+
+    MethodName getMethodName(String methodName) {
+        return methodNames.get(methodName.toLowerCase());
     }
 
     public void executeRequest(String input) {
@@ -150,6 +176,27 @@ public class Client {
             System.out.println(errorMessage);
             return;
         }
+
+        MethodName methodName = getMethodName(inputCommands[0]);
+        if (methodName == null) {
+            System.out.println(errorMessage);
+            return;
+        }
+
+        JSONObject request = createRequest(methodName, inputCommands);
+        String response = serverExecuteRequestTest(request);
+        System.out.println(response);
+    }
+
+    JSONObject createRequest(MethodName methodName, String[] inputCommands) {
+        JSONObject req = new JSONObject();
+        if (methodName.equals(MethodName.addReservationSlot)) {
+            
+        }
+    }
+
+    String serverExecuteRequestTest(JSONObject obj) {
+        return "";
     }
 
 }
