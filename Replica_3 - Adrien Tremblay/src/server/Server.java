@@ -2,7 +2,6 @@ package server;
 
 import general.City;
 import general.EventType;
-import jdk.jfr.internal.LogLevel;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -20,6 +19,9 @@ import static server.UdpServerThread.eventMapToString;
 
 public class Server {
     private static final String USAGE_MESSAGE = "Usage: server [MONTREAL/TORONTO/VANCOUVER] [port]";
+    final static int MONTREAL_REPLICA_PORT = 2301;
+    final static int TORONTO_REPLICA_PORT = 2302;
+    final static int VANCOUVER_REPLICA_PORT = 2303;
 
     public static void main(String args[]) {
         Logger serverLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -34,29 +36,31 @@ public class Server {
             e.printStackTrace();
         }
 
-        serverLogger.info("test");
-
-        if (args.length != 2) {
-            serverLogger.severe("Please provide a city name and port");
+        if (args.length != 1) {
+            serverLogger.severe("Please provide a city name");
             serverLogger.severe(USAGE_MESSAGE);
             return;
         }
 
         City city;
-        try {
-            city = City.valueOf(args[0]);
-        } catch (Exception e) {
-            serverLogger.severe("Not a valid city name!");
-            serverLogger.severe(USAGE_MESSAGE);
-            return;
-        }
-
         int port;
-        try {
-            port = Integer.valueOf(args[1]);
-        } catch (NumberFormatException e) {
-            serverLogger.severe("The port could not be formatted as an integer");
-            return;
+        switch(args[0]) {
+            case "Montreal":
+                city = City.MONTREAL;
+                port = MONTREAL_REPLICA_PORT;
+                break;
+            case "Toronto":
+                city = City.TORONTO;
+                port = TORONTO_REPLICA_PORT;
+                break;
+            case "Vancouver":
+                city = City.VANCOUVER;
+                port = VANCOUVER_REPLICA_PORT;
+                break;
+            default:
+                serverLogger.severe("Not a valid city name!");
+                serverLogger.severe(USAGE_MESSAGE);
+                return;
         }
 
         CityReservationSystem cityReservationSystem;

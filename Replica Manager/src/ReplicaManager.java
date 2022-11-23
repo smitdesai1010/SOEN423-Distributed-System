@@ -7,10 +7,16 @@ import java.io.IOException;
 import java.net.*;
 
 public class ReplicaManager {
+    final static int REPLICA_MANAGER_PORT = 3435; // todo: I want to change this to 2300
+    final static int MONTREAL_REPLICA_PORT = 2301;
+    final static int TORONTO_REPLICA_PORT = 2302;
+    final static int VANCOUVER_REPLICA_PORT = 2303;
+    final static String GROUP_ADDRESS = "255.1.2.3";
+
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
-        if (args.length != 5)  {
-           System.out.println("Please provide ports for the RM, and all the three replicas");
-           System.out.println("Usage: replica_manager [replica_implementation_num] [rm_port] [montreal_port] [toronto_port] [vancouver_port]");
+        if (args.length != 1)  {
+           System.out.println("Please provide a replica implementation number");
+           System.out.println("Usage: replica_manager [replica_implementation_num]");
            return;
         }
 
@@ -27,29 +33,13 @@ public class ReplicaManager {
             return;
         }
 
-        int replicaManagerPort;
-        int replicaMontrealPort;
-        int replicaTorontoPort;
-        int replicaVancouverPort;
-        try {
-            replicaManagerPort = Integer.valueOf(args[1]);
-            replicaMontrealPort = Integer.valueOf(args[2]);
-            replicaTorontoPort = Integer.valueOf(args[3]);
-            replicaVancouverPort = Integer.valueOf(args[4]);
-        } catch (NumberFormatException e) {
-            System.out.println("One of the ports could not be formatted as an integer");
-            return;
-        }
-
         // spawning a replica for each city
-        Process montrealReplica = createReplica("MONTREAL", replicaMontrealPort, replicaImplementationNum);
-        Process torontoReplica = createReplica("TORONTO", replicaTorontoPort, replicaImplementationNum);
-        Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort, replicaImplementationNum);
+        Process montrealReplica = createReplica("Montreal", replicaImplementationNum);
+        Process torontoReplica = createReplica("Toronto", replicaImplementationNum);
+        Process vancouverReplica = createReplica("Vancouver", replicaImplementationNum);
 
         // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
-        Thread.sleep(1000);
-
-        // sending and receiving requests
+        //Thread.sleep(1000);
 
         JSONObject samplePayload = new JSONObject();
         samplePayload.put("MethodName", "reserveTicket");
@@ -57,25 +47,30 @@ public class ReplicaManager {
         samplePayload.put("eventType", "ArtGallery");
         samplePayload.put("eventID", "MTLA111022");
 
-        JSONObject response = sendMessageToLocalHost(replicaMontrealPort, samplePayload);
-
+        JSONObject response = sendMessageToLocalHost(MONTREAL_REPLICA_PORT, samplePayload);
         System.out.println(response.toJSONString());
 
-        /**
+        // sending and receiving requests
+        /*
+        InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
+        MulticastSocket udpSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
+        udpSocket.joinGroup(group);
+
         while (true) {
             // Create a packet for the client request
-            DatagramPacket clientRequestPacket = new DatagramPacket(new byte[1000], 1000);
+            DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
             // Receive a request using the packet we just created
-            udpSocket.receive(clientRequestPacket);
+            udpSocket.receive(frontEndRequestPacket);
+            String frontEndRequestString = new String(frontEndRequestPacket.getData(), 0, frontEndRequestPacket.getLength());
+            JSONParser jsonParser = new JSONParser();
+            JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
 
-            final ByteArrayInputStream bais = new ByteArrayInputStream(clientRequestPacket.getData());
-            final ObjectInputStream oos = new ObjectInputStream(bais);
-            Payload payload = (Payload) oos.readObject();
-
-            String replyString = "";
-
+            // todo: parse frontEndRequestObject and send and turn message
+            break;
         }
-         **/
+         */
+
+        System.out.println("all done");
     }
 
     private static JSONObject sendMessageToLocalHost(int port, JSONObject jsonObject) throws IOException, ParseException {
@@ -99,8 +94,8 @@ public class ReplicaManager {
         return replyObject;
     }
 
-    private static Process createReplica(String cityName, int port, int implementationNumber) {
-        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica.jar",  cityName, String.valueOf(port));
+    private static Process createReplica(String cityName, int implementationNumber) {
+        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica.jar",  cityName);
         pb.redirectErrorStream(true);
         File log = new File("logs/" + cityName + ".log");
         pb.redirectOutput(log);
