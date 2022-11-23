@@ -28,19 +28,12 @@ public class ReplicaManager {
             return;
         }
 
-        // spawning a replica (montreal)
-        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica3.jar",  "MONTREAL", String.valueOf(replicaMontrealPort));
-        pb.redirectErrorStream(true);
-        File log = new File("penis.log");
-        pb.redirectOutput(log);
-        File f = new File("ReplicaJars/replica3");
-        pb.directory(f);
-        Process replica3;
-        try {
-            replica3 = pb.start();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // spawning a replica for each city
+        Process montrealReplica = createReplica("MONTREAL", replicaMontrealPort);
+        //Process torontoReplica = createReplica("TORONTO", replicaTorontoPort);
+        //Process vancouverReplica = createReplica("VANCOUVER", replicaVancouverPort);
+
+        // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
 
         // sending and receiving requests
 
@@ -90,5 +83,21 @@ public class ReplicaManager {
         JSONParser jsonParser = new JSONParser();
         JSONObject replyObject = (JSONObject) jsonParser.parse(jsonString);
         return replyObject;
+    }
+
+    private static Process createReplica(String cityName, int port) {
+        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica.jar",  cityName, String.valueOf(port));
+        pb.redirectErrorStream(true);
+        File log = new File(cityName + ".log");
+        pb.redirectOutput(log);
+        File f = new File("replicaJar");
+        pb.directory(f);
+        Process process;
+        try {
+            process = pb.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return  process;
     }
 }
