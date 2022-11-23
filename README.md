@@ -154,11 +154,11 @@ The above sequence diagram shows the flow for detecting faulty replicas and resp
    </td>
   </tr>
   <tr>
-   <td>40106849
+   <td>40077277
    </td>
-   <td> Ekamjot Singh
+   <td> Efe Harmankaya
    </td>
-   <td>Test Cases
+   <td>Client + Test Cases
    </td>
   </tr>
 </table>
