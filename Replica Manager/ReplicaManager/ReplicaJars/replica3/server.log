@@ -1,0 +1,10 @@
+Nov 23, 2022 12:32:14 AM server.Server main
+INFO: test
+Nov 23, 2022 12:32:16 AM server.Server main
+INFO: test2
+Nov 23, 2022 12:32:16 AM server.CityReservationSystem reserveTicket
+SEVERE: Failed to reserve ticket. (123) is not a valid city acronym!
+Nov 23, 2022 12:32:26 AM server.Server main
+INFO: test2
+Nov 23, 2022 12:32:26 AM server.CityReservationSystem reserveTicket
+SEVERE: Failed to reserve ticket. (123) is not a valid city acronym!

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.*;
 
 public class ReplicaManager {
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException, InterruptedException {
         if (args.length != 4)  {
            System.out.println("Please provide ports for the RM, and all the three replicas");
            System.out.println("Usage: replica_manager [rm_port] [montreal_port] [toronto_port] [vancouver_port]");
@@ -29,8 +29,11 @@ public class ReplicaManager {
         }
 
         // spawning a replica (montreal)
-        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica3.jar", String.valueOf(replicaMontrealPort));
-        File f = new File("ReplicaJars");
+        ProcessBuilder pb = new ProcessBuilder("java", "-jar", "replica3.jar",  "MONTREAL", String.valueOf(replicaMontrealPort));
+        pb.redirectErrorStream(true);
+        File log = new File("penis.log");
+        pb.redirectOutput(log);
+        File f = new File("ReplicaJars/replica3");
         pb.directory(f);
         Process replica3;
         try {
@@ -41,13 +44,15 @@ public class ReplicaManager {
 
         // sending and receiving requests
 
-        JSONObject samplePaylooad = new JSONObject();
-        samplePaylooad.put("MethodName", "reserveTicket");
-        samplePaylooad.put("participantID", "1234");
-        samplePaylooad.put("eventType", "ArtGallery");
-        samplePaylooad.put("eventID", "1234");
+        JSONObject samplePayload = new JSONObject();
+        samplePayload.put("MethodName", "reserveTicket");
+        samplePayload.put("participantID", "1234");
+        samplePayload.put("eventType", "ArtGallery");
+        samplePayload.put("eventID", "1234");
         System.out.println("sending da message");
-        sendMessageToLocalHost(replicaMontrealPort, samplePaylooad);
+        System.out.println(replica3.isAlive());
+
+        sendMessageToLocalHost(replicaMontrealPort, samplePayload);
         System.out.println("all done");
 
         /**
