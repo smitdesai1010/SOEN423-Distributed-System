@@ -95,8 +95,9 @@ public class Client {
         System.out.println(
                 "reserve clientID eventID eventType - Reserves a ticket for a given clientID at the given eventID\n" +
                         "get clientID - Gets all active tickets for a given clientID (all cities)\n" +
-                        "cancel clientID eventID - Cancels the ticket for given clientID at the given eventID\n" +
-                        "exchange clientId old_eventID new_eventID new_eventType - Exchanges clientId's ticket for eventId with new_eventId of type new_eventType\n"
+                        "cancel clientID eventID eventType - Cancels the ticket for given clientID at the given eventID\n"
+                        +
+                        "exchange clientId old_eventID old_eventType new_eventID new_eventType - Exchanges clientId's ticket for eventId with new_eventId of type new_eventType\n"
                         +
                         "add eventID eventType capacity - Adds a new reservation slot with a given eventID\n" +
                         "remove eventID eventType - Removes a reservation slot for a given eventID\n" +
@@ -147,6 +148,12 @@ public class Client {
         getEventSchedule,
         cancelTicket,
         exchangeTicket;
+
+        String value;
+
+        MethodName() {
+            this.value = this.name();
+        }
     };
 
     private HashMap<String, MethodName> methodNames = new HashMap<String, MethodName>() {
@@ -184,14 +191,155 @@ public class Client {
         }
 
         JSONObject request = createRequest(methodName, inputCommands);
-        String response = serverExecuteRequestTest(request);
-        System.out.println(response);
+        if (request == null) {
+            System.out.println(errorMessage);
+            return;
+        }
+
+        System.out.println("REQUEST CREATED");
+        System.out.println(request.toJSONString());
+        System.out.println("\n\n\n");
+        // String response = serverExecuteRequestTest(request);
+        // System.out.println(response);
+    }
+
+    // TODO possible different implementation
+    enum JSONFieldNames {
+        MethodName,
+        adminId,
+        participantId,
+        eventType,
+        eventId,
+        capacity,
+        new_eventType,
+        new_eventId;
+
+        String key;
+
+        JSONFieldNames() {
+            this.key = this.name();
+        }
     }
 
     JSONObject createRequest(MethodName methodName, String[] inputCommands) {
-        JSONObject req = new JSONObject();
-        if (methodName.equals(MethodName.addReservationSlot)) {
-            
+        HashMap<String, Object> req = new HashMap<String, Object>() {
+            {
+                put(JSONFieldNames.MethodName.key, methodName.value);
+            }
+        };
+
+        if (!validateRequest(methodName, inputCommands))
+            return null;
+
+        switch (methodName) {
+            case addReservationSlot:
+                // add eventID eventType capacity
+                // MethodName adminId eventType eventId capacity
+                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.eventType.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventId.key, inputCommands[1]);
+                req.put(JSONFieldNames.capacity.key, Integer.parseInt(inputCommands[3]));
+                break;
+            case removeReservationSlot:
+                // remove eventID eventType
+                // MethodName adminId eventType eventId'
+                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.eventType.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventId.key, inputCommands[1]);
+                break;
+            case listReservationSlotAvailable:
+                // list eventType
+                // MethodName adminId eventType
+                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.eventType.key, inputCommands[1]);
+                break;
+            case cancelTicket:
+            case reserveTicket:
+                // cancel clientID eventID eventType
+                // reserve clientID eventID eventType
+                // MethodName participantId eventType eventId
+                // ? No need to pass in userId?
+                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                req.put(JSONFieldNames.eventType.key, inputCommands[3]);
+                req.put(JSONFieldNames.eventId.key, inputCommands[2]);
+                break;
+            case getEventSchedule:
+                // get clientID
+                // MethodName participantId
+                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                break;
+            case exchangeTicket:
+                // exchange clientId old_eventID old_eventType new_eventID new_eventType
+                // MethodName participantId eventType eventId new_eventType new_eventId
+                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                req.put(JSONFieldNames.eventType.key, inputCommands[3]);
+                req.put(JSONFieldNames.eventId.key, inputCommands[2]);
+                req.put(JSONFieldNames.new_eventType.key, inputCommands[5]);
+                req.put(JSONFieldNames.new_eventId.key, inputCommands[4]);
+                break;
+            default:
+                return null;
+        }
+        return new JSONObject(req);
+    }
+
+    boolean validateRequest(MethodName methodName, String[] inputCommands) {
+        // TODO validate admin permissisions here?
+        // TODO validate eventType?
+        switch (methodName) {
+            case addReservationSlot:
+                // add eventID eventType capacity
+                // MethodName adminId eventType eventId capacity
+                if (inputCommands.length != 4)
+                    return false;
+                try {
+                    Integer.parseInt(inputCommands[3]);
+                } catch (Exception e) {
+                    return false;
+                }
+                return true;
+            case removeReservationSlot:
+                // remove eventID eventType
+                // MethodName adminId eventType eventId
+                if (inputCommands.length != 3)
+                    return false;
+                return true;
+            case listReservationSlotAvailable:
+                // list eventType
+                // MethodName adminId eventType
+                if (inputCommands.length != 2)
+                    return false;
+
+                return true;
+            case cancelTicket:
+                // cancel clientID eventID eventType
+                // MethodName participantId eventType eventId
+                if (inputCommands.length != 4)
+                    return false;
+
+                return true;
+            case reserveTicket:
+                // reserve clientID eventID eventType
+                // MethodName participantId eventType eventId
+                if (inputCommands.length != 4)
+                    return false;
+
+                return true;
+            case getEventSchedule:
+                // get clientID
+                // MethodName participantId
+                if (inputCommands.length != 2)
+                    return false;
+                return true;
+            case exchangeTicket:
+                // exchange clientId old_eventID old_eventType new_eventID new_eventType
+                // MethodName participantId eventType eventId new_eventType new_eventId
+                if (inputCommands.length != 6)
+                    return false;
+                return true;
+            default:
+                System.out.println("Invalid methodName in validateRequest");
+                return false;
         }
     }
 
