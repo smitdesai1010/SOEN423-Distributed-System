@@ -1,0 +1,4 @@
+Nov 23, 2022 4:47:52 PM server.Server main
+SEVERE: Please provide a city name
+Nov 23, 2022 4:47:52 PM server.Server main
+SEVERE: Usage: server [MONTREAL/TORONTO/VANCOUVER] [port]

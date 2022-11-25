@@ -77,7 +77,7 @@ public class UdpServerThread extends Thread{
         }
     }
 
-    private static String eventMapToString(HashMap<EventType, HashMap<String, Event>> eventMap, City city, String participantId) {
+    public static String eventMapToString(HashMap<EventType, HashMap<String, Event>> eventMap, City city, String participantId) {
         StringBuilder ret = new StringBuilder("---------------------" + city.name() + "---------------------\n");
 
         for (EventType eventType : EventType.values()) {
@@ -99,7 +99,7 @@ public class UdpServerThread extends Thread{
         return ret.toString();
     }
 
-    private static String eventMapToReservationSlotAvailableCount(HashMap<EventType, HashMap<String, Event>> eventMap, EventType eventType) {
+    public static String eventMapToReservationSlotAvailableCount(HashMap<EventType, HashMap<String, Event>> eventMap, EventType eventType) {
         StringBuilder ret = new StringBuilder();
 
         Collection<Event> eventsCollection = eventMap.get(eventType).values();
