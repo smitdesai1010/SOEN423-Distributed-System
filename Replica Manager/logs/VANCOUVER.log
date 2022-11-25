@@ -1,4 +1,12 @@
-Nov 23, 2022 4:47:52 PM server.Server main
-SEVERE: Please provide a city name
-Nov 23, 2022 4:47:52 PM server.Server main
-SEVERE: Usage: server [MONTREAL/TORONTO/VANCOUVER] [port]
+Exception in thread "Thread-1" java.lang.RuntimeException: java.net.BindException: Address already in use (Bind failed)
+	at server.UdpServerThread.run(UdpServerThread.java:31)
+Caused by: java.net.BindException: Address already in use (Bind failed)
+	at java.net.PlainDatagramSocketImpl.bind0(Native Method)
+	at java.net.AbstractPlainDatagramSocketImpl.bind(AbstractPlainDatagramSocketImpl.java:93)
+	at java.net.DatagramSocket.bind(DatagramSocket.java:392)
+	at java.net.DatagramSocket.<init>(DatagramSocket.java:242)
+	at java.net.DatagramSocket.<init>(DatagramSocket.java:299)
+	at java.net.DatagramSocket.<init>(DatagramSocket.java:271)
+	at server.UdpServerThread.run(UdpServerThread.java:29)
+Nov 23, 2022 5:09:40 PM server.Server main
+SEVERE: socket error
