@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.net.*;
 
 public class ReplicaManager {
-    final static int REPLICA_MANAGER_PORT = 3435; // todo: I want to change this to 2300
+    final static int REPLICA_MANAGER_PORT = 3435;
     final static int MONTREAL_REPLICA_PORT = 2301;
     final static int TORONTO_REPLICA_PORT = 2302;
     final static int VANCOUVER_REPLICA_PORT = 2303;
-    final static String GROUP_ADDRESS = "255.1.2.3";
+    final static String GROUP_ADDRESS = "225.1.2.3";
+    final static boolean DEBUG = true;
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
         if (args.length != 1)  {
@@ -41,21 +42,14 @@ public class ReplicaManager {
         // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
         //Thread.sleep(1000);
 
-        /*
-        JSONObject samplePayload = new JSONObject();
-        samplePayload.put("MethodName", "reserveTicket");
-        samplePayload.put("participantID", "MTLP0000");
-        samplePayload.put("eventType", "ArtGallery");
-        samplePayload.put("eventID", "MTLA111022");
-
-        JSONObject response = handleFrontEndObject(samplePayload);
-        System.out.println(response.toJSONString());
-         */
-
         // sending and receiving requests
         InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
         MulticastSocket udpSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
         udpSocket.joinGroup(group);
+
+        // launching a thread to send a request if debug mode is on
+        if (DEBUG)
+            (new InputSimulator()).run();
 
         while (true) {
             // Create a packet for the client request
@@ -67,8 +61,13 @@ public class ReplicaManager {
             JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
 
             JSONObject replyObject = handleFrontEndObject(frontEndRequestObject);
+            if (DEBUG) {
+                System.out.println(replyObject);
+            }
             final byte[] replyObjectData = replyObject.toJSONString().getBytes();
 
+            // todo: send back ip address and port
+            // todo: need to get ip address of the frontend as part of the message?
             // Create a packet for the reply
             DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, frontEndRequestPacket.getAddress(), frontEndRequestPacket.getPort());
             // Send the reply
@@ -76,8 +75,6 @@ public class ReplicaManager {
 
             break;
         }
-
-        System.out.println("all done");
     }
 
     private static JSONObject sendMessageToLocalHost(int port, JSONObject jsonObject) throws IOException, ParseException {
@@ -117,7 +114,7 @@ public class ReplicaManager {
         return  process;
     }
 
-    private static JSONObject handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
+    public static JSONObject handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
         String cityPrefix;
 
         if (frontEndObject.containsKey(jsonFieldNames.ADMIN_ID)) {
