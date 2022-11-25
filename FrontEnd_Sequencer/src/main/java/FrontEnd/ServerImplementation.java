@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,24 +23,29 @@ public class ServerImplementation implements ServerInterface {
     // Note: SOAP spins up a new thread automatically to handle mulitple concurrent requests
 
     @Override
-    public String executeRequest(JSONObject obj) {
-        //TODO: Create port number dynamically
-        //TODO: Pass the dynamic PORT number to the sequencer along with the data
+    public String executeRequest(JSONObject requestData) {
 
-        System.out.println("RECEIVED REQUEST");
+        System.out.println("Received request: " + requestData.toString());
 
-        Sequencer seq = new Sequencer();
-        boolean multicastResult = seq.multicast(obj);
+        try {
+            // By passing in 0, the system automatically picks a free port
+            DatagramSocket aSocket = new DatagramSocket(0);
+            requestData.put("port", aSocket.getLocalPort());
 
-        if (!multicastResult) {
-            return "Internal Server error";
+            boolean multicastResult = new Sequencer().multicast(requestData);
+
+            if (!multicastResult) {
+                throw new Exception("Failed to multicast request");
+            }
+
+            JSONObject[] responseData = listenForResponse(aSocket);
+            checkForByzantineFailure(responseData);
+            return returnTheConsensusResponse(responseData);
         }
-
-        int PORT = 1000;
-        JSONObject[] responseData = listenForResponse(PORT);
-        checkForByzantineFailure(responseData);
-
-        return returnTheConsensusResponse(responseData);
+        catch (Exception e) {
+            System.out.println("Exception in Frontend: " + e.getMessage());
+            return "Internal Server Error";
+        }
     }
 
     private void checkForByzantineFailure(JSONObject[] responseData) {
@@ -79,14 +85,13 @@ public class ServerImplementation implements ServerInterface {
         return "Internal Server Error";
     }
 
-    private JSONObject[] listenForResponse(int PORT) {
+    private JSONObject[] listenForResponse(DatagramSocket aSocket) {
 
         List<JSONObject> responseData = new ArrayList<>();
         JSONParser parser = new JSONParser();
         System.out.println("Starting UDP Server to wait for responses");
 
-        try (DatagramSocket aSocket = new DatagramSocket(PORT)) {
-
+        try {
             while (responseData.size() < 3) {
                 byte[] requestByteArray = new byte[10000];
                 DatagramPacket request = new DatagramPacket(requestByteArray, requestByteArray.length);
@@ -126,9 +131,5 @@ public class ServerImplementation implements ServerInterface {
     }
 }
 
-// Send back data to the port number sent in request
 // what message to send on failure or crash(timeout) detection
-
-// use multicastpublisher
-// total ordering
 
