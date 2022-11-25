@@ -38,19 +38,18 @@ public class ReplicaManager {
         Process torontoReplica = createReplica("Toronto", replicaImplementationNum);
         Process vancouverReplica = createReplica("Vancouver", replicaImplementationNum);
 
-        // NOTE: sometimes you need to wait a bit after creating the replicas before sending requests
-        //Thread.sleep(1000);
-
         // sending and receiving requests
         InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
-        MulticastSocket udpSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
-        udpSocket.joinGroup(group);
+        MulticastSocket multicastSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
+        multicastSocket.joinGroup(group);
+
+        int sequenceNumber = 0;
 
         while (true) {
             // Create a packet for the client request
             DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
             // Receive a request using the packet we just created
-            udpSocket.receive(frontEndRequestPacket);
+            multicastSocket.receive(frontEndRequestPacket);
             String frontEndRequestString = new String(frontEndRequestPacket.getData(), 0, frontEndRequestPacket.getLength());
             JSONParser jsonParser = new JSONParser();
             JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
@@ -65,11 +64,11 @@ public class ReplicaManager {
             replyObject.put(jsonFieldNames.REPLICAMANAGER_IP, InetAddress.getLocalHost().getHostAddress());
             final byte[] replyObjectData = replyObject.toJSONString().getBytes();
 
-            // todo: send back ip address and port
             // todo: need to get ip address of the frontend as part of the message?
             // Create a packet for the reply
-            DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
             // Send the reply
+            DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
+            DatagramSocket udpSocket = new DatagramSocket();
             udpSocket.send(serverReplyPacket);
 
             break;

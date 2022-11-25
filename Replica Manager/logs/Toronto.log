@@ -1,5 +1,3 @@
-Nov 25, 2022 4:49:25 PM server.Server main
-SEVERE: socket error
 Exception in thread "Thread-1" java.lang.RuntimeException: java.net.BindException: Address already in use (Bind failed)
 	at server.UdpServerThread.run(UdpServerThread.java:31)
 Caused by: java.net.BindException: Address already in use (Bind failed)
@@ -10,3 +8,5 @@ Caused by: java.net.BindException: Address already in use (Bind failed)
 	at java.net.DatagramSocket.<init>(DatagramSocket.java:299)
 	at java.net.DatagramSocket.<init>(DatagramSocket.java:271)
 	at server.UdpServerThread.run(UdpServerThread.java:29)
+Nov 25, 2022 5:46:28 PM server.Server main
+SEVERE: socket error
