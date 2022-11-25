@@ -1,6 +1,18 @@
-Nov 25, 2022 3:13:06 PM server.Server main
+Nov 25, 2022 4:44:03 PM server.Server main
 INFO: test2
-Nov 25, 2022 3:13:06 PM server.CityReservationSystem logRecord
+Nov 25, 2022 4:44:03 PM server.CityReservationSystem logRecord
 INFO: Request reserveTicket(MTLP0000, MTLA111022, ART_GALLERY) SUCCEEDED!
 Response:
 true
+Nov 25, 2022 4:44:56 PM server.Server main
+INFO: test2
+Nov 25, 2022 4:44:56 PM server.CityReservationSystem reserveTicket
+SEVERE: You cannot reserve more than one event of the same type in the same day
+Nov 25, 2022 4:45:39 PM server.Server main
+INFO: test2
+Nov 25, 2022 4:45:39 PM server.CityReservationSystem reserveTicket
+SEVERE: You cannot reserve more than one event of the same type in the same day
+Nov 25, 2022 4:49:29 PM server.Server main
+INFO: test2
+Nov 25, 2022 4:49:29 PM server.CityReservationSystem reserveTicket
+SEVERE: You cannot reserve more than one event of the same type in the same day

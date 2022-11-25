@@ -10,6 +10,10 @@ public class jsonFieldNames {
     public static final String NEW_EVENT_TYPE = "new_eventType";
     public static final String NEW_EVENT_ID = "new_eventID";
     public static final String CAPACTIY = "capacity";
+    public static final String SEQUENCE_NUMBER = "sequenceNumber";
+    public static final String FRONTEND_IP = "frontend-IP";
+    public static final String FRONTEND_PORT = "port";
+    public static final String REPLICAMANAGER_IP = "IP";
 
     // response
     public static final String SUCCESS = "Success";
