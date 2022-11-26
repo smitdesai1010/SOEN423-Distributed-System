@@ -8,20 +8,55 @@ import java.net.*;
 public class InputSimulator {
     private static final int FRONT_END_PORT = 2304;
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException, InterruptedException {
 
         (new ListeningThread()).start();
 
-        JSONObject samplePayload = new JSONObject();
-        samplePayload.put("MethodName", "reserveTicket");
-        samplePayload.put("participantID", "MTLP0000");
-        samplePayload.put("eventType", "ArtGallery");
-        samplePayload.put("eventID", "MTLA111022");
-        samplePayload.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
-        samplePayload.put(jsonFieldNames.FRONTEND_IP, "localhost");
-        samplePayload.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
+        // todo: create test payloads for every operation type (will probably never do this kek)
 
-        multicast(samplePayload);
+        JSONObject samplePayload0 = new JSONObject();
+        samplePayload0.put("MethodName", jsonFieldNames.RESERVE_TICKET);
+        samplePayload0.put("participantID", "MTLP0000");
+        samplePayload0.put("eventType", "ArtGallery");
+        samplePayload0.put("eventID", "MTLA111022");
+        samplePayload0.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+        samplePayload0.put(jsonFieldNames.FRONTEND_IP, "localhost");
+        samplePayload0.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
+
+        JSONObject samplePayload1 = new JSONObject();
+        samplePayload1.put("MethodName", jsonFieldNames.RESERVE_TICKET);
+        samplePayload1.put("participantID", "MTLP0000");
+        samplePayload1.put("eventType", "ArtGallery");
+        samplePayload1.put("eventID", "TORA011022");
+        samplePayload1.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+        samplePayload1.put(jsonFieldNames.FRONTEND_IP, "localhost");
+        samplePayload1.put(jsonFieldNames.SEQUENCE_NUMBER, 1);
+
+        JSONObject samplePayload2 = new JSONObject();
+        samplePayload2.put("MethodName",jsonFieldNames.GET_EVENT_SCHEDULE);
+        samplePayload2.put("participantID", "MTLP0000");
+        samplePayload2.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+        samplePayload2.put(jsonFieldNames.FRONTEND_IP, "localhost");
+        samplePayload2.put(jsonFieldNames.SEQUENCE_NUMBER, 2);
+
+        JSONObject samplePayload3 = new JSONObject();
+        samplePayload3.put("MethodName",jsonFieldNames.ADD_RESERVATION_SLOT);
+        samplePayload3.put("adminID", "MTLA0000");
+        samplePayload3.put("eventType", "ArtGallery");
+        samplePayload3.put("eventID", "MTLM011022");
+        samplePayload3.put(jsonFieldNames.CAPACTIY, 7);
+        samplePayload3.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+        samplePayload3.put(jsonFieldNames.FRONTEND_IP, "localhost");
+        samplePayload3.put(jsonFieldNames.SEQUENCE_NUMBER, 3);
+
+        Thread.sleep(1000);
+        multicast(samplePayload3);
+        Thread.sleep(1000);
+        multicast(samplePayload1);
+        Thread.sleep(1000);
+        multicast(samplePayload0);
+        Thread.sleep(1000);
+        multicast(samplePayload2);
     }
 
     // note: stolen & modified from the sequencer just for my personal testing purposes

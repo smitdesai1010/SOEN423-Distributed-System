@@ -91,13 +91,15 @@ public class Server {
                     case "addReservationSlot": {
                         String eventId = (String) clientRequestObject.get(jsonFieldNames.EVENT_ID);
                         EventType eventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.EVENT_TYPE));
-                        int capacity = Integer.valueOf((String) clientRequestObject.get(jsonFieldNames.CAPACTIY));
+                        int capacity = Math.toIntExact((Long) clientRequestObject.get(jsonFieldNames.CAPACTIY));
                         succ = cityReservationSystem.addReservationSlot(eventId, eventType, capacity);
+                        break;
                     }
                     case "removeReservationSlot": {
                         String eventId = (String) clientRequestObject.get(jsonFieldNames.EVENT_ID);
                         EventType eventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.EVENT_TYPE));
                         succ = cityReservationSystem.removeReservationSlot(eventId, eventType);
+                        break;
                     }
                     case "listReservationSlotAvailable": {
                         EventType eventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.EVENT_TYPE));
@@ -105,7 +107,6 @@ public class Server {
                         break;
                     }
                     case "reserveTicket": {
-                        serverLogger.info("test2");
                         String participantId = (String) clientRequestObject.get(jsonFieldNames.PARTICIPANT_ID);
                         String eventId = (String) clientRequestObject.get(jsonFieldNames.EVENT_ID);
                         EventType eventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.EVENT_TYPE));
@@ -131,6 +132,7 @@ public class Server {
                         String NewEventId = (String) clientRequestObject.get(jsonFieldNames.NEW_EVENT_ID);
                         EventType NewEventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.NEW_EVENT_TYPE));
                         succ = cityReservationSystem.exchangeTicket(participantId, eventId, eventType, NewEventId, NewEventType);
+                        break;
                     }
                     default:
                         Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, "Unclear what the client is asking for!");
@@ -147,6 +149,7 @@ public class Server {
                 // Send the reply
                 udpSocket.send(serverReplyPacket);
             } catch (Exception e) {
+                e.printStackTrace();
                 serverLogger.severe(e.getStackTrace().toString());
             }
         }

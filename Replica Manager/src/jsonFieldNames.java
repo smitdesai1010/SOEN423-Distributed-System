@@ -19,4 +19,12 @@ public class jsonFieldNames {
     public static final String SUCCESS = "Success";
     public static final String DATA = "Data";
 
+    // method names
+    public static final String ADD_RESERVATION_SLOT = "addReservationSlot";
+    public static final String REMOVE_RESERVATION_SLOT = "removeReservationSlot";
+    public static final String LIST_RESERVATION_SLOT_AVAILABLE = "listReservationSlotAvailable";
+    public static final String RESERVE_TICKET = "reserveTicket";
+    public static final String GET_EVENT_SCHEDULE = "getEventSchedule";
+    public static final String CANCEL_TICKET = "cancelTicket";
+    public static final String EXCHANGE_TICKET = "exchangeTicket";
 }

@@ -52,6 +52,8 @@ public class ReplicaManager {
         int sequenceNumber = 0;
         requestQueue = new HashMap<Integer, JSONObject>();
 
+        //todo: send back port number of RM
+
         while (true) {
             // Create a packet for the client request
             DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
