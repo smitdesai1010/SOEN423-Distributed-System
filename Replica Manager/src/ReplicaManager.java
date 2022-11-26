@@ -38,6 +38,9 @@ public class ReplicaManager {
         Process torontoReplica = createReplica("Toronto", replicaImplementationNum);
         Process vancouverReplica = createReplica("Vancouver", replicaImplementationNum);
 
+        // making sure processes are killed when the RM exits
+        Runtime.getRuntime().addShutdownHook(new ReplicaShutdownThread(montrealReplica, torontoReplica, vancouverReplica));
+
         // sending and receiving requests
         InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
         MulticastSocket multicastSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
@@ -54,24 +57,7 @@ public class ReplicaManager {
             JSONParser jsonParser = new JSONParser();
             JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
 
-            String frontendIp = (String) frontEndRequestObject.get(jsonFieldNames.FRONTEND_IP);
-            System.out.println(frontendIp);
-            long longFrontendPort = ((long)frontEndRequestObject.get(jsonFieldNames.FRONTEND_PORT));
-            int frontendPort = Math.toIntExact(longFrontendPort);
-            System.out.println(frontendPort);
-
-            JSONObject replyObject = handleFrontEndObject(frontEndRequestObject);
-            replyObject.put(jsonFieldNames.REPLICAMANAGER_IP, InetAddress.getLocalHost().getHostAddress());
-            final byte[] replyObjectData = replyObject.toJSONString().getBytes();
-
-            // todo: need to get ip address of the frontend as part of the message?
-            // Create a packet for the reply
-            // Send the reply
-            DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
-            DatagramSocket udpSocket = new DatagramSocket();
-            udpSocket.send(serverReplyPacket);
-
-            break;
+            handleFrontEndObject(frontEndRequestObject);
         }
     }
 
@@ -112,7 +98,7 @@ public class ReplicaManager {
         return  process;
     }
 
-    private static JSONObject handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
+    private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
         String cityPrefix;
 
         if (frontEndObject.containsKey(jsonFieldNames.ADMIN_ID)) {
@@ -121,7 +107,7 @@ public class ReplicaManager {
             cityPrefix = ((String) frontEndObject.get(jsonFieldNames.PARTICIPANT_ID)).substring(0, 3);
         } else {
             System.out.println("There is no participant or admin ID. Failed to identify which server to send the request to");
-            return null;
+            return;
         }
 
         int cityPort;
@@ -137,9 +123,21 @@ public class ReplicaManager {
                 break;
             default:
                 System.out.println("Something went wrong parsing the city prefix");
-                return null;
+                return;
         }
 
-        return sendMessageToLocalHost(cityPort, frontEndObject);
+        JSONObject replyObject = sendMessageToLocalHost(cityPort, frontEndObject);
+
+        String frontendIp = (String) frontEndObject.get(jsonFieldNames.FRONTEND_IP);
+        long longFrontendPort = ((long)frontEndObject.get(jsonFieldNames.FRONTEND_PORT));
+        int frontendPort = Math.toIntExact(longFrontendPort);
+
+        replyObject.put(jsonFieldNames.REPLICAMANAGER_IP, InetAddress.getLocalHost().getHostAddress());
+        final byte[] replyObjectData = replyObject.toJSONString().getBytes();
+
+        // Send the reply
+        DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
+        DatagramSocket udpSocket = new DatagramSocket();
+        udpSocket.send(serverReplyPacket);
     }
 }
