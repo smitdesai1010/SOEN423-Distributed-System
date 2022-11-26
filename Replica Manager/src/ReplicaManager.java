@@ -5,6 +5,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.net.*;
+import java.util.HashMap;
 
 public class ReplicaManager {
     public final static int REPLICA_MANAGER_PORT = 3435;
@@ -12,6 +13,8 @@ public class ReplicaManager {
     public final static int TORONTO_REPLICA_PORT = 2302;
     public final static int VANCOUVER_REPLICA_PORT = 2303;
     public final static String GROUP_ADDRESS = "225.1.2.3";
+    private static int nextSequenceNum = 0;
+    private static HashMap<Integer, JSONObject> requestQueue;
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
         if (args.length != 1)  {
@@ -47,6 +50,7 @@ public class ReplicaManager {
         multicastSocket.joinGroup(group);
 
         int sequenceNumber = 0;
+        requestQueue = new HashMap<Integer, JSONObject>();
 
         while (true) {
             // Create a packet for the client request
@@ -99,8 +103,14 @@ public class ReplicaManager {
     }
 
     private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
-        String cityPrefix;
+        int sequenceNumber = Math.toIntExact((long) frontEndObject.get(jsonFieldNames.SEQUENCE_NUMBER));
+        if (sequenceNumber != nextSequenceNum) {
+            requestQueue.put(sequenceNumber, frontEndObject);
+            return;
+        }
+        nextSequenceNum++;
 
+        String cityPrefix;
         if (frontEndObject.containsKey(jsonFieldNames.ADMIN_ID)) {
             cityPrefix = ((String) frontEndObject.get(jsonFieldNames.ADMIN_ID)).substring(0, 3);
         } else if (frontEndObject.containsKey(jsonFieldNames.PARTICIPANT_ID)) {
@@ -139,5 +149,8 @@ public class ReplicaManager {
         DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
         DatagramSocket udpSocket = new DatagramSocket();
         udpSocket.send(serverReplyPacket);
+
+        if (requestQueue.containsKey(nextSequenceNum))
+            handleFrontEndObject(requestQueue.get(nextSequenceNum));
     }
 }

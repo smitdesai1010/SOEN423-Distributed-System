@@ -22,7 +22,6 @@ public class InputSimulator {
         samplePayload.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
 
         multicast(samplePayload);
-        JSONObject replyObject;
     }
 
     // note: stolen & modified from the sequencer just for my personal testing purposes
@@ -50,23 +49,25 @@ public class InputSimulator {
                 throw new RuntimeException(e);
             }
 
-            DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
-            // Receive a request using the packet we just created
-            try {
-                udpSocket.receive(frontEndRequestPacket);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String frontEndRequestString = new String(frontEndRequestPacket.getData(), 0, frontEndRequestPacket.getLength());
-            JSONParser jsonParser = new JSONParser();
-            JSONObject frontEndRequestObject ;
-            try {
-                frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            while (true) {
+                DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
+                // Receive a request using the packet we just created
+                try {
+                    udpSocket.receive(frontEndRequestPacket);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String frontEndRequestString = new String(frontEndRequestPacket.getData(), 0, frontEndRequestPacket.getLength());
+                JSONParser jsonParser = new JSONParser();
+                JSONObject frontEndRequestObject ;
+                try {
+                    frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
 
-            System.out.println(frontEndRequestObject.toJSONString());
+                System.out.println(frontEndRequestObject.toJSONString());
+            }
         }
     }
 
