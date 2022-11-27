@@ -15,6 +15,14 @@ public class InputSimulator {
         // todo: create test payloads for every operation type (will probably never do this kek)
 
         JSONObject samplePayload0 = new JSONObject();
+        samplePayload0.put("MethodName", "die");
+        samplePayload0.put("participantID", "MTLP0000");
+        samplePayload0.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+        samplePayload0.put(jsonFieldNames.FRONTEND_IP, "localhost");
+        samplePayload0.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
+
+        /*
+        JSONObject samplePayload0 = new JSONObject();
         samplePayload0.put("MethodName", jsonFieldNames.RESERVE_TICKET);
         samplePayload0.put("participantID", "MTLP0000");
         samplePayload0.put("eventType", "ArtGallery");
@@ -22,6 +30,7 @@ public class InputSimulator {
         samplePayload0.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload0.put(jsonFieldNames.FRONTEND_IP, "localhost");
         samplePayload0.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
+         */
 
         JSONObject samplePayload1 = new JSONObject();
         samplePayload1.put("MethodName", jsonFieldNames.RESERVE_TICKET);
@@ -49,13 +58,9 @@ public class InputSimulator {
         samplePayload3.put(jsonFieldNames.FRONTEND_IP, "localhost");
         samplePayload3.put(jsonFieldNames.SEQUENCE_NUMBER, 3);
 
-        Thread.sleep(1000);
         multicast(samplePayload3);
-        Thread.sleep(1000);
         multicast(samplePayload1);
-        Thread.sleep(1000);
         multicast(samplePayload0);
-        Thread.sleep(1000);
         multicast(samplePayload2);
     }
 
