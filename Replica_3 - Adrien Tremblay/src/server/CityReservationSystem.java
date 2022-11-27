@@ -40,7 +40,8 @@ public class CityReservationSystem implements ReservationSystem {
             e.printStackTrace();
         }
 
-        (new UdpServerThread(this)).start();
+        UdpServerThread udpServerThread = new UdpServerThread(this);
+        udpServerThread.start();
     }
 
     @Override
