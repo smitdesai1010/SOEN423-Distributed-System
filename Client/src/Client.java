@@ -122,7 +122,7 @@ public class Client {
         String input = null;
         boolean running = input == null;
         while (running) {
-            // TODO check with team to obtain user options from the server (ie.
+            // TODO check with team to obtain user options from the server
             if (input == null) // initial load -> show welcome message
                 System.out.println(
                         String.format("Welcome %s\nConnected Server: %s\n===============", userId, connectedServer));
@@ -283,9 +283,23 @@ public class Client {
         return new JSONObject(req);
     }
 
+    enum EventType {
+        ArtGallery,
+        Concerts,
+        Theatre;
+    }
+
+    boolean validateEventType(String eventType) {
+        for (EventType eType : EventType.values()) {
+            if (eType.name().equalsIgnoreCase(eventType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     boolean validateRequest(MethodName methodName, String[] inputCommands) {
         // TODO validate admin permissisions here?
-        // TODO validate eventType?
         switch (methodName) {
             case addReservationSlot:
                 // add eventID eventType capacity
@@ -297,34 +311,34 @@ public class Client {
                 } catch (Exception e) {
                     return false;
                 }
-                return true;
+                return validateEventType(inputCommands[2]);
             case removeReservationSlot:
                 // remove eventID eventType
                 // MethodName adminId eventType eventId
                 if (inputCommands.length != 3)
                     return false;
-                return true;
+                return validateEventType(inputCommands[2]);
             case listReservationSlotAvailable:
                 // list eventType
                 // MethodName adminId eventType
                 if (inputCommands.length != 2)
                     return false;
 
-                return true;
+                return validateEventType(inputCommands[1]);
             case cancelTicket:
                 // cancel clientID eventID eventType
                 // MethodName participantId eventType eventId
                 if (inputCommands.length != 4)
                     return false;
 
-                return true;
+                return validateEventType(inputCommands[3]);
             case reserveTicket:
                 // reserve clientID eventID eventType
                 // MethodName participantId eventType eventId
                 if (inputCommands.length != 4)
                     return false;
 
-                return true;
+                return validateEventType(inputCommands[3]);
             case getEventSchedule:
                 // get clientID
                 // MethodName participantId
@@ -336,7 +350,7 @@ public class Client {
                 // MethodName participantId eventType eventId new_eventType new_eventId
                 if (inputCommands.length != 6)
                     return false;
-                return true;
+                return validateEventType(inputCommands[3]) && validateEventType(inputCommands[5]);
             default:
                 System.out.println("Invalid methodName in validateRequest");
                 return false;
