@@ -14,27 +14,15 @@ public class Sequencer {
     private MulticastSocket mSocket = null;
     InetAddress group = null;
 
-    public Sequencer(){
-        try {
-            mSocket = new MulticastSocket();
-            group = InetAddress.getByName(GROUP_ADDRESS);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Sequencer() throws IOException {
+        mSocket = new MulticastSocket();
+        group = InetAddress.getByName(GROUP_ADDRESS);
     }
 
-    public boolean multicast(JSONObject obj) {
+    public void multicast(JSONObject obj) throws IOException {
         obj = assignSequenceNumber(obj);
-        DatagramPacket packet = new DatagramPacket(obj.toJSONString().getBytes(), obj.toJSONString().length(), group,
-                                                   PORT);
-        try {
-            mSocket.send(packet);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+        DatagramPacket packet = new DatagramPacket(obj.toJSONString().getBytes(), obj.toJSONString().length(), group, PORT);
+        mSocket.send(packet);
     }
 
     private JSONObject assignSequenceNumber(JSONObject obj) {

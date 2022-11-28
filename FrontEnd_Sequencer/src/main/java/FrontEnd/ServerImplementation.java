@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +19,12 @@ import java.util.List;
 public class ServerImplementation implements ServerInterface {
 
     // Note: SOAP spins up a new thread automatically to handle mulitple concurrent requests
+    // Note: Timeouts will be handled by the RM
+    // Note: On Software failure: Multicast a message to all the RM informing them about the faultly RM
+    //       The faulty RM will unregister itself from the group and kill itself
+
+    // TODO: Race conditions?
+    public static int ALIVE_REPLICAS = 3;
 
     @Override
     public String executeRequest(JSONObject requestData) {
@@ -30,17 +34,13 @@ public class ServerImplementation implements ServerInterface {
         try {
             // By passing in 0, the system automatically picks a free port
             DatagramSocket aSocket = new DatagramSocket(0);
+            requestData.put("frontend-IP", InetAddress.getLocalHost().getHostAddress());
             requestData.put("port", aSocket.getLocalPort());
 
-            boolean multicastResult = new Sequencer().multicast(requestData);
-
-            if (!multicastResult) {
-                throw new Exception("Failed to multicast request");
-            }
-
+            new Sequencer().multicast(requestData);
             JSONObject[] responseData = listenForResponse(aSocket);
-            checkForByzantineFailure(responseData);
-            return returnTheConsensusResponse(responseData);
+
+            return checkForByzantineFailureAndReturnTheConsensusResponse(responseData);
         }
         catch (Exception e) {
             System.out.println("Exception in Frontend: " + e.getMessage());
@@ -48,88 +48,62 @@ public class ServerImplementation implements ServerInterface {
         }
     }
 
-    private void checkForByzantineFailure(JSONObject[] responseData) {
+    private String checkForByzantineFailureAndReturnTheConsensusResponse(JSONObject[] responseData) throws IOException {
         int totalSuccess = 0;
-        int totalEntries = responseData.length;
+        String response = "Interal Server Error";
+
+        // If there are only 2 alive replicas, we cannot check for failure using majority election
+        if (ALIVE_REPLICAS == 2) {
+            return responseData[0].get("Data").toString();
+        }
 
         // Find the majority answer
         for (JSONObject obj : responseData) {
             totalSuccess += Boolean.parseBoolean(obj.get("Success").toString()) ? 1 : -1;
         }
 
-        // If the value of totalSuccess is not equal to totalEntries, means one replica has sent different
-        if (Math.abs(totalSuccess) != totalEntries) {
-            for (JSONObject obj : responseData) {
-                int objSucessValue = Boolean.parseBoolean(obj.get("Success").toString()) ? 1 : -1;
-
-                if (objSucessValue * totalSuccess < 0) {
-                    //TODO: Inform the defective replica
-                }
-            }
-        }
-    }
-
-    private String returnTheConsensusResponse(JSONObject[] responseData) {
-        int success = 0;
-
         for (JSONObject obj : responseData) {
-            // If success is true, add 1. If success is false, add -1
-            success += Boolean.parseBoolean(obj.get("Success").toString()) ? 1 : -1;
+            int objSucessValue = Boolean.parseBoolean(obj.get("Success").toString()) ? 1 : -1;
 
-            //TODO: What if Total entries is 2 (one crashed cause of timeout)
-            if (success == 2 || success == -2) {
-                return obj.get("Data").toString();
+            // If the success value of the obj is opposite of the total value, then it has produced a wrong resut
+            if (objSucessValue * totalSuccess < 0) {
+                JSONObject errorMessageObj = new JSONObject();
+                errorMessageObj.put("MethodName", "killReplica");
+                errorMessageObj.put("FailedReplicaIP", obj.get("IP").toString());
+
+                // TODO: Will the sequence numbers cause any errors here?
+                // Multicast the message and faulty RM will deactivate itself
+                // The frontEnd doesn't wait for a ACK response from teh faulty RM
+                new Sequencer().multicast(errorMessageObj);
+                ALIVE_REPLICAS = 2;
+            }
+
+            else {
+                response = obj.get("Data").toString();
             }
         }
 
-        return "Internal Server Error";
+        return response;
     }
 
-    private JSONObject[] listenForResponse(DatagramSocket aSocket) {
-
+    private JSONObject[] listenForResponse(DatagramSocket aSocket) throws IOException, ParseException {
         List<JSONObject> responseData = new ArrayList<>();
         JSONParser parser = new JSONParser();
         System.out.println("Starting UDP Server to wait for responses");
 
-        try {
-            while (responseData.size() < 3) {
-                byte[] requestByteArray = new byte[10000];
-                DatagramPacket request = new DatagramPacket(requestByteArray, requestByteArray.length);
-                aSocket.receive(request);
+        while (responseData.size() < ALIVE_REPLICAS) {
+            byte[] requestByteArray = new byte[50000];
+            DatagramPacket request = new DatagramPacket(requestByteArray, requestByteArray.length);
+            aSocket.receive(request);
 
-                String requestString = new String(request.getData()).trim();
-                JSONObject requestObject = (JSONObject) parser.parse(requestString);
+            String requestString = new String(request.getData()).trim();
+            JSONObject requestObject = (JSONObject) parser.parse(requestString);
 
-                responseData.add(requestObject);
-                //TODO: Store client ip and port number in the JSON
-                //TODO: Check for Timeout?
-                //TODO: Do I need to send back response to RM that I received the data?
-            }
-        }
-        catch (IOException | ParseException e) {
-            System.out.println("Error on UDP Server " + e.getMessage());
+            responseData.add(requestObject);
         }
 
+        aSocket.close();
         return responseData.toArray(new JSONObject[0]);
     }
-
-
-    public void sendUDPMessage(String IP, int PORT, JSONObject JSONData) {
-
-        try (DatagramSocket aSocket = new DatagramSocket()) {
-            byte[] byteData = JSONData.toJSONString().getBytes(StandardCharsets.UTF_8);
-
-            InetAddress aHost = InetAddress.getByName(IP);
-            DatagramPacket request = new DatagramPacket(byteData, byteData.length, aHost, PORT);
-            aSocket.send(request);
-
-            //TODO: Wait for receiving the response?
-        }
-        catch (IOException e) {
-            System.out.println("Exception in UDP-Client: " + e.getMessage());
-        }
-    }
 }
-
-// what message to send on failure or crash(timeout) detection
 
