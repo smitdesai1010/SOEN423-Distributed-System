@@ -1,0 +1,4 @@
+Nov 28, 2022 7:47:11 AM server.CityReservationSystem logRecord
+INFO: Request addReservationSlot(MTLM011022, ART_GALLERY) SUCCEEDED!
+Response:
+true
