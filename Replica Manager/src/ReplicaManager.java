@@ -91,6 +91,15 @@ public class ReplicaManager {
     }
 
     private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
+        if (frontEndObject.get(jsonFieldNames.METHOD_NAME).equals("killReplica")) {
+            if (frontEndObject.get("FailedReplicaIP").equals(InetAddress.getLocalHost().getHostAddress())) {
+                System.out.println("Take yourself out of the game before somebody else puts your name to shame...");
+                System.exit(0);
+            } else {
+                return;
+            }
+        }
+
         int sequenceNumber = Math.toIntExact((long) frontEndObject.get(jsonFieldNames.SEQUENCE_NUMBER));
         if (sequenceNumber != nextSequenceNum) {
             requestQueue.put(sequenceNumber, frontEndObject);
