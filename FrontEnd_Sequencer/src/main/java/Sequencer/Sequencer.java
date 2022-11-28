@@ -10,7 +10,7 @@ import java.net.MulticastSocket;
 public class Sequencer {
     static int sequence_number = 0;
     private final int PORT = 3435;
-    private final String GROUP_ADDRESS = "255.1.2.3";
+    private final String GROUP_ADDRESS = "225.1.2.3";
     private MulticastSocket mSocket = null;
     InetAddress group = null;
 
@@ -21,12 +21,14 @@ public class Sequencer {
 
     public void multicast(JSONObject obj) throws IOException {
         obj = assignSequenceNumber(obj);
+        System.out.println("Received object for Multicast: " + obj.toString());
         DatagramPacket packet = new DatagramPacket(obj.toJSONString().getBytes(), obj.toJSONString().length(), group, PORT);
         mSocket.send(packet);
+        System.out.println("Object multicasted");
     }
 
     private JSONObject assignSequenceNumber(JSONObject obj) {
-        obj.put("sequenceNumber", ++sequence_number);
+        obj.put("sequenceNumber", sequence_number++);
         return obj;
     }
 }
