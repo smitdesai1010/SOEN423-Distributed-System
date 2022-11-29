@@ -6,13 +6,13 @@ TODO description
 Compile `Client.java` using javac with the provided `json-simple-1.1.jar` jar file
 
 ```
-> javac -cp ../lib/json-simple-1.1.jar Client.java
+> javac -cp ../lib/json-simple-1.1.1.jar:FrontEnd/ServerInterface.java: Client.java
 ```
 
 Running the Client server
 
 ```
-> java -cp ../lib/json-simple-1.1.jar: Client
+> java -cp ../lib/json-simple-1.1.1.jar:FrontEnd/ServerInterface.java: Client
 ```
 
 TODO others

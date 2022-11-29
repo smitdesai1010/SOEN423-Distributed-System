@@ -12,7 +12,13 @@ import javax.xml.ws.WebServiceException;
 
 import org.json.simple.JSONObject;
 
+import FrontEnd.ServerInterface;
+
 public class Client {
+    final String serverURL = "http://192.168.2.14:9000/";
+    final String[] serverNames = new String[] { "MTL", "TOR", "VAN" };
+    ServerInterface server;
+
     final static String errorMessage = "Invalid input - Please try again.\n";
     static InputStreamReader is = new InputStreamReader(System.in);
     static BufferedReader br = new BufferedReader(is);
@@ -49,14 +55,12 @@ public class Client {
         return userId;
     }
 
-    public static boolean validateUserId(String userId) {
+    public boolean validateUserId(String userId) {
         if (userId == null)
             return false;
         if (userId.length() < 5)
             return false;
 
-        // TODO better method of getting server names?
-        String[] serverNames = new String[] { "MTL", "TOR", "VAN" };
         String serverName = userId.substring(0, 3);
         if (!Arrays.asList(serverNames).contains(serverName.toUpperCase()))
             return false;
@@ -66,19 +70,11 @@ public class Client {
         return true;
     }
 
-    // ! Temp
-    interface ServerInterface {
-    }
-    // ! Temp
-
-    // TODO return server
-    public void getServer(String userId) {
-        String serverName = "MTL"; // TODO serverName check for URL
-
-        ServerInterface server;
+    public ServerInterface getServer() {
+        ServerInterface server = null;
         try {
-            URL url = new URL(String.format("http://localhost:8080/%s?wsdl", serverName));
-            QName qName = new QName("http://util/", "ServerService");
+            URL url = new URL(serverURL);
+            QName qName = new QName("http://FrontEnd/", "ServerImplementationService");
             Service service = Service.create(url, qName);
             server = service.getPort(ServerInterface.class);
         } catch (MalformedURLException e) {
@@ -87,11 +83,11 @@ public class Client {
             e.printStackTrace();
         }
 
+        return server;
     }
 
-    // TODO (String message) from server
+    // TODO options based on user role
     public String getUserInput() {
-        // System.out.println(message);
         System.out.println(
                 "reserve clientID eventID eventType - Reserves a ticket for a given clientID at the given eventID\n" +
                         "get clientID - Gets all active tickets for a given clientID (all cities)\n" +
@@ -116,16 +112,20 @@ public class Client {
 
     public void start() {
         userId = promptUserId();
-        // TODO get server implementation
-        ServerInterface x; // ! temp
-        String connectedServer = "MTL"; // TODO connectedServer
+        server = getServer();
+        if (server == null) {
+            System.out.println("Server is null");
+            return;
+        }
+
+        String connectedServer = "MTL";
         String input = null;
         boolean running = input == null;
         while (running) {
-            // TODO check with team to obtain user options from the server
             if (input == null) // initial load -> show welcome message
                 System.out.println(
-                        String.format("Welcome %s\nConnected Server: %s\n===============", userId, connectedServer));
+                        String.format("Welcome %s\nConnected Server: %s\n===============", userId,
+                                connectedServer));
 
             input = getUserInput();
             if (input.equalsIgnoreCase("exit")) {
@@ -196,14 +196,10 @@ public class Client {
             return;
         }
 
-        System.out.println("REQUEST CREATED");
-        System.out.println(request.toJSONString());
-        System.out.println("\n\n\n");
-        // String response = serverExecuteRequestTest(request);
-        // System.out.println(response);
+        String response = server.executeRequest(request.toJSONString());
+        System.out.println(response);
     }
 
-    // TODO possible different implementation
     enum JSONFieldNames {
         MethodName,
         adminId,
@@ -236,7 +232,7 @@ public class Client {
                 // add eventID eventType capacity
                 // MethodName adminId eventType eventId capacity
                 req.put(JSONFieldNames.adminId.key, userId);
-                req.put(JSONFieldNames.eventType.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 req.put(JSONFieldNames.capacity.key, Integer.parseInt(inputCommands[3]));
                 break;
@@ -244,14 +240,14 @@ public class Client {
                 // remove eventID eventType
                 // MethodName adminId eventType eventId'
                 req.put(JSONFieldNames.adminId.key, userId);
-                req.put(JSONFieldNames.eventType.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 break;
             case listReservationSlotAvailable:
                 // list eventType
                 // MethodName adminId eventType
                 req.put(JSONFieldNames.adminId.key, userId);
-                req.put(JSONFieldNames.eventType.key, inputCommands[1]);
+                req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[1]));
                 break;
             case cancelTicket:
             case reserveTicket:
@@ -260,7 +256,7 @@ public class Client {
                 // MethodName participantId eventType eventId
                 // ? No need to pass in userId?
                 req.put(JSONFieldNames.participantId.key, inputCommands[1]);
-                req.put(JSONFieldNames.eventType.key, inputCommands[3]);
+                req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[2]);
                 break;
             case getEventSchedule:
@@ -272,9 +268,9 @@ public class Client {
                 // exchange clientId old_eventID old_eventType new_eventID new_eventType
                 // MethodName participantId eventType eventId new_eventType new_eventId
                 req.put(JSONFieldNames.participantId.key, inputCommands[1]);
-                req.put(JSONFieldNames.eventType.key, inputCommands[3]);
+                req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[2]);
-                req.put(JSONFieldNames.new_eventType.key, inputCommands[5]);
+                req.put(JSONFieldNames.new_eventType.key, EventType.fromString(inputCommands[5]));
                 req.put(JSONFieldNames.new_eventId.key, inputCommands[4]);
                 break;
             default:
@@ -287,19 +283,23 @@ public class Client {
         ArtGallery,
         Concerts,
         Theatre;
+
+        static String fromString(String eString) {
+            for (EventType eventType : EventType.values()) {
+                if (eventType.name().equalsIgnoreCase(eString)) {
+                    return eventType.name();
+                }
+            }
+            return null;
+        }
     }
 
     boolean validateEventType(String eventType) {
-        for (EventType eType : EventType.values()) {
-            if (eType.name().equalsIgnoreCase(eventType)) {
-                return true;
-            }
-        }
-        return false;
+        return EventType.fromString(eventType) != null;
     }
 
+    // TODO admin permissions?
     boolean validateRequest(MethodName methodName, String[] inputCommands) {
-        // TODO validate admin permissisions here?
         switch (methodName) {
             case addReservationSlot:
                 // add eventID eventType capacity
@@ -356,9 +356,4 @@ public class Client {
                 return false;
         }
     }
-
-    String serverExecuteRequestTest(JSONObject obj) {
-        return "";
-    }
-
 }
