@@ -1,0 +1,18 @@
+=========================================
+2022.11.29.18.24.45
+
+Received request
+Starting UDP Server to wait for responses
+Checking for Byzantine Failure
+Sending back the response to the Client: Internal Server Error
+=========================================
+=========================================
+Timestamp: 2022.11.29.18.26.31
+
+Received request
+Received object for Multicast: {"eventID":"MTLM011022","sequenceNumber":0,"port":65200,"adminID":"MTLA0000","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"172.30.49.169","capacity":7}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Checking for Byzantine Failure
+Sending back the response to the Client: Internal Server Error
+=========================================

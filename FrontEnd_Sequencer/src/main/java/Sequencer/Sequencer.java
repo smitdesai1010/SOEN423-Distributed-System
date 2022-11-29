@@ -1,5 +1,6 @@
 package Sequencer;
 
+import FrontEnd.Logger;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -19,12 +20,12 @@ public class Sequencer {
         group = InetAddress.getByName(GROUP_ADDRESS);
     }
 
-    public void multicast(JSONObject obj) throws IOException {
+    public void multicast(JSONObject obj, Logger logger) throws IOException {
         obj = assignSequenceNumber(obj);
-        System.out.println("Received object for Multicast: " + obj.toString());
+        logger.addToLogs("Received object for Multicast: " + obj.toString());
         DatagramPacket packet = new DatagramPacket(obj.toJSONString().getBytes(), obj.toJSONString().length(), group, PORT);
         mSocket.send(packet);
-        System.out.println("Object multicasted");
+        logger.addToLogs("Object multicasted with sequence number: " + (sequence_number - 1));
     }
 
     private JSONObject assignSequenceNumber(JSONObject obj) {

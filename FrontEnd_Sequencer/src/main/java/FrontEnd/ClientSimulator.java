@@ -9,7 +9,7 @@ import javax.xml.ws.Service;
 
 import org.json.simple.JSONObject;
 
-public class Client {
+public class ClientSimulator {
     public static void main(String[] args) throws UnknownHostException {
         String serverURL = "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + 9000 + "/?wsdl";
 
