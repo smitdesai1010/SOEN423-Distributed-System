@@ -14,12 +14,12 @@ public class InputSimulator {
 
         // todo: create test payloads for every operation type (will probably never do this kek)
 
-        JSONObject crashPayload = new JSONObject();
-        crashPayload.put("MethodName", "die");
-        crashPayload.put("participantID", "MTLP0000");
-        crashPayload.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
-        crashPayload.put(jsonFieldNames.FRONTEND_IP, "localhost");
-        crashPayload.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
+//        JSONObject crashPayload = new JSONObject();
+//        crashPayload.put("MethodName", "die");
+//        crashPayload.put("participantID", "MTLP0000");
+//        crashPayload.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
+//        crashPayload.put(jsonFieldNames.FRONTEND_IP, "localhost");
+//        crashPayload.put(jsonFieldNames.SEQUENCE_NUMBER, 0);
 
         /*
         JSONObject samplePayload0 = new JSONObject();
@@ -58,15 +58,15 @@ public class InputSimulator {
         samplePayload3.put(jsonFieldNames.FRONTEND_IP, "localhost");
         samplePayload3.put(jsonFieldNames.SEQUENCE_NUMBER, 3);
 
-        JSONObject shutdownPayload = new JSONObject();
-        shutdownPayload.put("MethodName", "killReplica");
-        shutdownPayload.put("FailedReplicaIP", "127.0.1.1");
+//        JSONObject shutdownPayload = new JSONObject();
+//        shutdownPayload.put("MethodName", "killReplica");
+//        shutdownPayload.put("FailedReplicaIP", "127.0.1.1");
 
         multicast(samplePayload3);
         multicast(samplePayload1);
-        multicast(crashPayload);
+//        multicast(crashPayload);
         multicast(samplePayload2);
-        multicast(shutdownPayload);
+//        multicast(shutdownPayload);
     }
 
     // note: stolen & modified from the sequencer just for my personal testing purposes
