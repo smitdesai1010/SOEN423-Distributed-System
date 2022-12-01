@@ -7,45 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371515d8-b386-4f81-9d70-917421db3c7f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/SOEN423-Distributed-System.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/libraries/json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/Client.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Replica_1___Efe_Harmankaya.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Replica_1 - Efe Harmankaya.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/FrontEndServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/FrontEndServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/ServerImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/ServerImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/Sequencer/Sequencer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/Sequencer/Sequencer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/FrontEndServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/FrontEndServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/Sequencer/Sequencer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/Sequencer/Sequencer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/City.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/InputSimulator$ListeningThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/InputSimulator$ListeningThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/InputSimulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/InputSimulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/ReplicaManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/ReplicaManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/MONTREAL.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/MONTREAL.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/TORONTO.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/TORONTO.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/server.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/server.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl3/server.log.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/src/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/src/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/src/InputSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/src/InputSimulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/src/ReplicaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/src/ReplicaManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica_1 - Smit Desai/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
