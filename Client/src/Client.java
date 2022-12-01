@@ -203,7 +203,7 @@ public class Client {
 
     enum JSONFieldNames {
         MethodName,
-        adminId,
+        adminID,
         participantID,
         eventType,
         eventId,
@@ -232,7 +232,7 @@ public class Client {
             case addReservationSlot:
                 // add eventID eventType capacity
                 // MethodName adminId eventType eventId capacity
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 req.put(JSONFieldNames.capacity.key, Integer.parseInt(inputCommands[3]));
@@ -240,14 +240,14 @@ public class Client {
             case removeReservationSlot:
                 // remove eventID eventType
                 // MethodName adminId eventType eventId'
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 break;
             case listReservationSlotAvailable:
                 // list eventType
                 // MethodName adminId eventType
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[1]));
                 break;
             case cancelTicket:

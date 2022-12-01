@@ -64,7 +64,7 @@ public class UDP extends Thread {
                 JSONObject response;
                 // TODO check param ordering
                 if (request.type.equals(ServerAction.list)) {
-                    response = this.server.listReservationSlotsAvailable(EventType.valueOf(request.eventType));
+                    response = this.server.listReservationSlotsAvailable(request.id, EventType.valueOf(request.eventType));
                 } else if (request.type.equals(ServerAction.reserve)) {
                     response = this.server.reserveTicket(request.id, request.eventId,
                             EventType.valueOf(request.eventType));

@@ -25,7 +25,7 @@ public class ServerRequest implements Serializable {
     }
 
     // construct ServerAction.list
-    public ServerRequest(ServerAction type, String eventType) {
+    public ServerRequest(ServerAction type, String id, String eventType, boolean _unused) {
         this.type = type;
         this.eventType = eventType;
     }
