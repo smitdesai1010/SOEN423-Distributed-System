@@ -7,24 +7,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371515d8-b386-4f81-9d70-917421db3c7f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/requests/ExchangeCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DTRS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/IDTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/IDTRS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/ServerDataHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ServerDataHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/UDP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/requests/ListRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ListRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/requests/CancelRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/CancelRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/requests/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ExchangeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/requests/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ReserveRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -91,13 +96,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/util/DTRS.java</url>
-          <line>167</line>
+          <line>176</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/util/DTRS.java</url>
-          <line>225</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

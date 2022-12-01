@@ -15,6 +15,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import util.requests.*;
 
+import javax.xml.ws.Response;
+
 public class DTRS implements IDTRS {
     String city;
     String prefix;
@@ -67,6 +69,13 @@ public class DTRS implements IDTRS {
         jsonFieldNames() {
             this.key = this.name();
         }
+    }
+
+    JSONObject createResponse(Boolean success, String data) {
+        JSONObject response = new JSONObject();
+        response.put(jsonFieldNames.Success.key, success);
+        response.put(jsonFieldNames.Data.key, data);
+        return response;
     }
 
     @Override
@@ -193,18 +202,105 @@ public class DTRS implements IDTRS {
 
     @Override
     public JSONObject reserveTicket(String participantId, String eventId, EventType eventType) {
-        // TODO Auto-generated method stub
-        return null;
+        String[] params = new String[] { participantId, eventId, eventType.toString() };
+
+        String homeServer = participantId.substring(0, 3);
+        String eventLocationId = eventId.substring(0, 3);
+        if (eventLocationId.equalsIgnoreCase(this.prefix)) { // operation on current server
+            HashMap<String, EventData> eventData = this.serverData.get(eventType);
+            if (!eventData.containsKey(eventId)) {
+//                logResponse(ServerAction.reserve, user, params, response);
+                return createResponse(false, String.format("Unable to reserve eventId: %s - Does not exist.", eventId));
+            }
+
+            if (eventData.get(eventId).capacity < 1) {
+//                logResponse(ServerAction.reserve, user, params, response);
+                return createResponse(false, String.format("Unable to reserve eventID: %s - No remaining tickets.", eventId));
+            }
+            if (eventData.get(eventId).guests.contains(participantId)) {
+//                logResponse(ServerAction.reserve, user, params, response);
+                return createResponse(false, String.format(
+                        "Unable to reserve eventId: %s for clientId: %s - Client already has a reservation", eventId, participantId));
+            }
+
+            // check if called through remote server - to ensure max 3 remote reservations
+            if (!eventLocationId.equalsIgnoreCase(homeServer)) {
+                int count = 0;
+                // (eventId, EventData)
+                for (Map.Entry<String, EventData> e : this.serverData.get(eventType).entrySet()) {
+                    if (e.getValue().guests.contains(participantId))
+                        count++;
+                }
+                if (++count > 3) {
+//                    logResponse(ServerAction.reserve, user, params, response);
+                    return createResponse(false, "Unable to reserve event - Maximum of 3 remote reservations per city.");
+                }
+            }
+
+            eventData.get(eventId).addGuest(new String(participantId));
+
+//            logResponse(ServerAction.reserve, user, params, response);
+            return createResponse(true, String.format("Successfully reserved eventType: %s eventId: %s for clientId: %s",
+                    eventType.name(), eventId, participantId));
+        }
+
+        // operation on remote server
+        for (ServerPort server : ServerPort.values()) {
+            if (server.PORT == -1 || server.name().equalsIgnoreCase(homeServer)) continue;
+            if (eventLocationId.equalsIgnoreCase(server.name())) {
+                ReserveRequest request = new ReserveRequest(eventType.toString(), participantId, eventId);
+                return sendServerRequest(request, server);
+            }
+        }
+
+//        logResponse(ServerAction.reserve, user, params, response);
+        return createResponse(false, String.format("Invalid eventId: %s - Unable to connect to remote server.", eventId));
     }
 
     @Override
     public JSONObject cancelTicket(String participantId, String eventId, EventType eventType) {
-        // TODO Auto-generated method stub
-        return null;
+        String eventLocationId = eventId.substring(0, 3);
+        // operation on current server
+        String[] params = new String[] { participantId, eventId };
+        if (eventLocationId.equalsIgnoreCase(this.prefix)) {
+            // (key, value) => (eventType, eventData HashMap)
+            for (Map.Entry<EventType, HashMap<String, EventData>> event : this.serverData.entrySet()) {
+                // (key, value) => (eventId, eventData)
+                for (Map.Entry<String, EventData> eventData : event.getValue().entrySet()) {
+                    if (eventData.getKey().equalsIgnoreCase(eventId)) {
+                        if (!eventData.getValue().guests.contains(participantId)) {
+//                            logResponse(ServerAction.cancel, user, params, response);
+                            return createResponse(false, String.format(
+                                    "Unable to cancel ticket - %s does not have a reservation for %s", participantId, eventId));
+                        }
+
+                        this.serverData.get(event.getKey()).get(eventData.getKey()).removeGuest(participantId);
+
+//                        logResponse(ServerAction.cancel, user, params, response);
+                        return createResponse(true, "Successfully canceled the ticket for eventId: " + eventId);
+                    }
+                }
+            }
+//            logResponse(ServerAction.cancel, user, params, response);
+            return createResponse(false, "Unable to cancel ticket - eventId does not exist.");
+        }
+
+        String homeServer = participantId.substring(0,3);
+        // operation on remote server
+        for (ServerPort server : ServerPort.values()) {
+            if (server.PORT == -1 || server.name().equalsIgnoreCase(homeServer)) continue;
+            if (server.name().equalsIgnoreCase(eventLocationId)) {
+                CancelRequest request = new CancelRequest(participantId, eventId, eventType.name());
+                return sendServerRequest(request, server);
+            }
+        }
+
+//        logResponse(ServerAction.cancel, user, params, response);
+        return createResponse(false, String.format("Invalid eventId: %s - Unable to connect to remote server.", eventId));
     }
 
     private String getEventsById(String id) {
-        StringBuilder events = new StringBuilder(this.city);
+        StringBuilder events = new StringBuilder(this.city + "\n");
         // (EventType, EventId Hashmap)
         for (Map.Entry<EventType, HashMap<String, EventData>> eType : this.serverData.entrySet()) {
             if (eType.getKey().equals(EventType.None))
@@ -254,8 +350,165 @@ public class DTRS implements IDTRS {
     @Override
     public JSONObject exchangeTicket(String participantId, String eventId, EventType eventType, String newEventId,
             EventType newEventType) {
-        // TODO Auto-generated method stub
-        return null;
+        String[] params = new String[] { participantId, eventId, newEventId,
+                newEventType.toString() };
+
+        String oldLocationId = eventId.substring(0, 3);
+        String newLocationId = newEventId.substring(0, 3);
+
+        ExchangeCondition old_cond = new ExchangeCondition(eventId);
+        ExchangeCondition new_cond = new ExchangeCondition(newEventType,
+                newEventId);
+
+        // * both operations on the same server (current) -> no remote connection
+        if (oldLocationId.equalsIgnoreCase(newLocationId) &&
+                oldLocationId.equalsIgnoreCase(this.prefix)) {
+            // check if old_eventId is valid for id input
+            // (key, value) => (eventType, eventData HashMap)
+            for (Map.Entry<EventType, HashMap<String, EventData>> event : this.serverData.entrySet()) {
+                // (key, value) => (eventId, eventData)
+                for (Map.Entry<String, EventData> eventData : event.getValue().entrySet()) {
+                    if (eventData.getKey().equalsIgnoreCase(eventId)) {
+                        if (!eventData.getValue().guests.contains(participantId)) {
+//                            logResponse(ServerAction.cancel, user, params, response);
+                            return createResponse(false, String.format(
+                                    "Unable to exchange ticket - %s does not have a reservation to exchange for %s", participantId,
+                                    eventId));
+                        }
+                        old_cond = new ExchangeCondition(true, event.getKey(), eventData.getKey());
+                    }
+                }
+            }
+
+            if (!old_cond.status) {
+//                logResponse(ServerAction.exchange, user, params, response);
+                return createResponse(false, "Unable to exchange tickets - Invalid eventId");
+            }
+
+            EventType nEventType = new_cond.eventType;
+            if (nEventType.equals(EventType.None)) {
+//                logResponse(ServerAction.exchange, user, params, response);
+                return createResponse(false, "Unable to exchange tickets - Invalid eventType");
+            }
+
+            EventData new_eventData = this.serverData.get(nEventType)
+                    .get(new_cond.eventId);
+            if (new_eventData.guests.contains(participantId)) {
+//                logResponse(ServerAction.exchange, user, params, response);
+                return createResponse(false, String.format("Cannot exchange tickets for %s as %s already has a ticket",
+                        new_cond.eventId, participantId));
+            }
+            if (new_eventData.capacity <= 0) {
+//                logResponse(ServerAction.exchange, user, params, response);
+                return createResponse(false, String.format("Cannot exchange tickets for %s as there is no capacity",
+                        new_cond.eventId));
+            }
+            // success perform exchange and return
+            this.serverData.get(old_cond.eventType).get(old_cond.eventId).removeGuest(participantId);
+            this.serverData.get(nEventType).get(new_cond.eventId).addGuest(participantId);
+
+            return createResponse(true, String.format("Successfully exchanged tickets - %s exchanged for %s", old_cond.eventId,
+                    new_cond.eventId));
+        }
+
+        String homeServer = participantId.substring(0, 3);
+        // * both operations on the same server (not this server) -> find server &
+        // call
+        if (oldLocationId.equalsIgnoreCase(newLocationId)) {
+            // operation on remote server
+            for (ServerPort server : ServerPort.values()) {
+                if (server.PORT == -1 || server.name().equalsIgnoreCase(homeServer))
+                    continue;
+                if (server.name().equalsIgnoreCase(oldLocationId)) {
+                    ExchangeRequest request = new ExchangeRequest(participantId, eventId,
+                            newEventId,
+                            newEventType.toString());
+                    return sendServerRequest(request, server);
+                }
+            }
+        }
+
+        // * one condition on current & one condition on remote
+        if (oldLocationId.equalsIgnoreCase(this.prefix) ||
+                newLocationId.equalsIgnoreCase(this.prefix)) {
+            ExchangeCondition currentCond;
+            ExchangeCondition remoteCond;
+
+            if (oldLocationId.equalsIgnoreCase(this.prefix)) {
+                currentCond = new ExchangeCondition(false, null, eventId);
+                remoteCond = new ExchangeCondition(false, newEventType, newEventId);
+            } else { // newLocationId.equalsIgnoreCase(this.name)
+                currentCond = new ExchangeCondition(false, newEventType, newEventId);
+                remoteCond = new ExchangeCondition(false, null, eventId);
+            }
+
+            JSONObject response = new JSONObject();
+            // (key, value) => (eventType, eventData HashMap)
+            for (Map.Entry<EventType, HashMap<String, EventData>> event : this.serverData.entrySet()) {
+                // (key, value) => (eventId, eventData)
+                for (Map.Entry<String, EventData> eventData : event.getValue().entrySet()) {
+                    if (eventData.getKey().equalsIgnoreCase(currentCond.eventId)) {
+                        if (!eventData.getValue().guests.contains(participantId) && currentCond.eventType == null) {
+//                            logResponse(ServerAction.cancel, user, params, response);
+                            return createResponse(false, String.format(
+                                    "Unable to exchange ticket - %s does not have a reservation to exchange for %s", participantId,
+                                    currentCond.eventId));
+                        }
+                        currentCond.eventType = event.getKey();
+                        currentCond.status = true;
+                    }
+                }
+            }
+
+            if (!currentCond.status) {
+//                logResponse(ServerAction.exchange, user, params, response);
+                return createResponse(false, "Unable to exchange tickets - Invalid eventId");
+            }
+            String remoteLocationId = remoteCond.eventId.substring(0, 3);
+            // currentCond is valid attempt remoteCond
+            for (ServerPort server : ServerPort.values()) {
+                if (server.PORT == -1 || server.name().equalsIgnoreCase(homeServer)) continue;
+                if (server.name().equalsIgnoreCase(remoteLocationId)) {
+                    ServerRequest request;
+                    if (oldLocationId.equalsIgnoreCase(this.prefix)) { // reserve on remote server
+                        request = new ReserveRequest(newEventType.toString(), participantId,
+                                remoteCond.eventId);
+                    } else { // cancel on remote server
+                        request = new CancelRequest(participantId, remoteCond.eventId, remoteCond.eventType.name());
+                    }
+
+                    response = sendServerRequest(request, server);
+
+                    if ((boolean) response.get(jsonFieldNames.Success.key)) { // remoteCond success -> proceed with currentCond
+                        if (oldLocationId.equalsIgnoreCase(this.prefix)) { // currentCond = cancel
+                            this.serverData.get(currentCond.eventType).get(currentCond.eventId)
+                                    .removeGuest(participantId);
+                        } else { // currentCond = reserve
+                            this.serverData.get(currentCond.eventType).get(currentCond.eventId)
+                                    .addGuest(participantId);
+                        }
+                        response = createResponse(true, String.format("Successfully exchanged ticket - exchanged %s for %s",
+                                eventId, newEventId));
+                    }
+//                    logResponse(ServerAction.exchange, user, params, response);
+                    return response;
+                }
+            }
+//            logResponse(ServerAction.exchange, user, params, response);
+            return createResponse(false, "Unable to exchange ticket - Invalid new event information");
+        }
+
+        // * both operations on different servers
+        // attempt exchange operation from remote server
+        for (ServerPort server : ServerPort.values()) {
+            if (server.PORT == -1 || server.name().equalsIgnoreCase(homeServer)) continue;
+            ExchangeRequest request = new ExchangeRequest(participantId, eventId, newEventId, newEventType.toString());
+//            logResponse(ServerAction.exchange, user, params, response);
+            return sendServerRequest(request, server);
+        }
+
+//        logResponse(ServerAction.exchange, user, params, response);
+        return createResponse(false, "Unable to exchange ticket - Invalid event information");
     }
 
     public JSONObject sendServerRequest(ServerRequest request, ServerPort server) {
