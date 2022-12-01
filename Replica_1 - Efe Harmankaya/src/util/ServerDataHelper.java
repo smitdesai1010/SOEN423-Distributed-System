@@ -64,10 +64,13 @@ public class ServerDataHelper {
     public static HashMap<EventType, HashMap<String, EventData>> getStartupData(String city) {
         switch (city) {
             case "Montreal":
+                System.out.println("Montreal DATA");
                 return MTL_DATA;
             case "Toronto":
+                System.out.println("Toronto DATA");
                 return TOR_DATA;
             case "Vancouver":
+                System.out.println("Vancouver DATA");
                 return VAN_DATA;
             default:
                 System.out.println("DEFAULT GETSTARTUPDATA");

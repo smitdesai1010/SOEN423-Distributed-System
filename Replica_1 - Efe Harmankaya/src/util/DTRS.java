@@ -12,23 +12,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
-import util.requests.AddRequest;
-import util.requests.GetRequest;
-import util.requests.RemoveRequest;
-import util.requests.ServerRequest;
+import org.json.simple.parser.JSONParser;
+import util.requests.*;
 
 public class DTRS implements IDTRS {
     String city;
+    String prefix;
     public int port;
     HashMap<EventType, HashMap<String, EventData>> serverData;
     UDP interServerUDP;
 
-    public DTRS(String city) {
+    public DTRS(String city) throws Exception {
         this.city = city;
+        this.prefix = getPrefix(city);
         this.port = getPort(city);
         this.serverData = ServerDataHelper.getStartupData(city);
         interServerUDP = new UDP(this, this.port);
         interServerUDP.start();
+    }
+
+    private String getPrefix(String city) throws Exception {
+        switch (city) {
+            case "Montreal":
+                return "MTL";
+            case "Toronto":
+                return "TOR";
+            case "Vancouver":
+                return "VAN";
+            default:
+                throw new Exception("Prefix not found");
+        }
     }
 
     int getPort(String city) {
@@ -101,12 +114,6 @@ public class DTRS implements IDTRS {
     @Override
     public JSONObject removeReservationSlot(String eventId, EventType eventType) {
         JSONObject response = new JSONObject();
-        // if (!user.hasPermission(Permission.remove)) {
-        // logNoPermission(ServerAction.remove, user);
-        // return new Response(
-        // "User doesn't have valid permissions to access : " +
-        // Permission.remove.label.toUpperCase());
-        // }
         String[] params = new String[] { eventId, eventType.toString() };
         String eventLocationId = eventId.substring(0, 3);
         // admin operation on current server
@@ -145,10 +152,43 @@ public class DTRS implements IDTRS {
         return response;
     }
 
+    private String printEvents(EventType eventType) {
+        HashMap<String, EventData> events = this.serverData.get(eventType);
+        StringBuilder out = new StringBuilder();
+        // (eventId, EventData)
+        for (Map.Entry<String, EventData> e : events.entrySet()) {
+            out.append(String.format("%s\n%s\n", e.getKey(), e.getValue().toString()));
+        }
+        return out.toString();
+    }
+
     @Override
-    public JSONObject listReservationSlotsAvailable(EventType eventType) {
-        // TODO Auto-generated method stub
-        return null;
+    public JSONObject listReservationSlotsAvailable(String adminId, EventType eventType) {
+        // current server events
+        StringBuilder events = new StringBuilder(printEvents(eventType));
+
+        JSONObject response = new JSONObject();
+        // called from remote - return w/o further inter-server communication
+        String locationId = adminId.substring(0,3);
+        if (!this.prefix.equalsIgnoreCase(locationId)) {
+            response.put(jsonFieldNames.Success.key, true);
+            response.put(jsonFieldNames.Data.key, events.toString());
+            return response;
+        }
+
+        String[] params = new String[] { eventType.toString() };
+        // fetch remote server events
+        for (ServerPort server : ServerPort.values()) {
+            if (server.name().equalsIgnoreCase(locationId) || server.PORT == -1) continue;
+            ListRequest request = new ListRequest(adminId, eventType.toString());
+            response = sendServerRequest(request, server);
+            if ((boolean) response.get(jsonFieldNames.Success.key))
+                events.append(response.get(jsonFieldNames.Data.key));
+        }
+        response.put(jsonFieldNames.Success.key, true);
+        response.put(jsonFieldNames.Data.key, events.toString());
+//        logResponse(ServerAction.list, user, params, response);
+        return response;
     }
 
     @Override
@@ -188,7 +228,7 @@ public class DTRS implements IDTRS {
 
         // operation on remote server - return events w/o fetching
         String homeServer = participantId.substring(0, 3);
-        if (!homeServer.equalsIgnoreCase(this.city)) {
+        if (!homeServer.equalsIgnoreCase(this.prefix)) {
             response.put(jsonFieldNames.Success.key, true);
             response.put(jsonFieldNames.Data.key, events.toString());
             return response;
@@ -198,6 +238,7 @@ public class DTRS implements IDTRS {
         // operation on current (home) server
         // fetch remote server events
         for (ServerPort server : ServerPort.values()) {
+            if (server.name().equalsIgnoreCase(homeServer) || server.PORT == -1) continue;
             GetRequest request = new GetRequest(participantId);
             response = sendServerRequest(request, server);
 
@@ -230,7 +271,7 @@ public class DTRS implements IDTRS {
             byte[] out = baos.toByteArray();
 
             DatagramPacket packet = new DatagramPacket(out, out.length, InetAddress.getByName("localhost"),
-                    getPort(server.name()));
+                    getPort(server.name));
             System.out.println("Sending request to: " + server.name().toUpperCase() + " port: "
                     + String.valueOf(getPort(server.name())));
 

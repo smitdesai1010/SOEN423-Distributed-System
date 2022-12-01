@@ -7,13 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371515d8-b386-4f81-9d70-917421db3c7f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/FrontEndServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/FrontEndServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/Sequencer/Sequencer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/Sequencer/Sequencer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DTRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/IDTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/IDTRS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/ServerDataHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ServerDataHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/UDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/requests/ListRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ListRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,9 +90,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/util/UDP.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/util/DTRS.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/util/DTRS.java</url>
+          <line>225</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

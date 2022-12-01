@@ -1,3 +1,30 @@
-Waiting to receive...
+Montreal DATA
 Starting server: Montreal
+Waiting to receive...
 received client packet
+================
+
+Type: get
+EventType: N/A
+Id: MTLP5555
+EventId: N/A
+Capacity: 0
+old_eventId: N/A
+new_eventId: N/A
+new_eventType: N/A
+================
+DEFAULT GETPORT
+Sending request to: TOR port: 2111
+================
+
+Type: get
+EventType: N/A
+Id: MTLP5555
+EventId: N/A
+Capacity: 0
+old_eventId: N/A
+new_eventId: N/A
+new_eventType: N/A
+================
+DEFAULT GETPORT
+Sending request to: VAN port: 2111

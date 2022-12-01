@@ -16,7 +16,7 @@ public class Server {
 
     enum jsonFieldNames {
         MethodName,
-        adminId,
+        adminID,
         participantID,
         eventId,
         eventType,
@@ -41,8 +41,13 @@ public class Server {
         // System.out.println("Incorrect argument provided");
         // return;
         // }
-
-        DTRS dtrs = new DTRS(args[0]);
+        DTRS dtrs;
+        try {
+            dtrs = new DTRS(args[0]);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         int port;
 
         switch (args[0]) {
@@ -106,7 +111,8 @@ public class Server {
                     case "listReservationSlotAvailable":
                         eventType = EventType
                                 .valueOf((String) clientRequestObject.get(jsonFieldNames.eventType.key));
-                        response = dtrs.listReservationSlotsAvailable(eventType);
+                        String adminId = (String) clientRequestObject.get(jsonFieldNames.adminID.key);
+                        response = dtrs.listReservationSlotsAvailable(adminId, eventType);
                         break;
                     case "reserveTicket":
                         participantId = (String) clientRequestObject.get(jsonFieldNames.participantID.key);
