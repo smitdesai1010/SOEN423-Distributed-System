@@ -6,7 +6,6 @@ import util.IDTRS.ServerAction;
 
 public class ServerRequest implements Serializable {
     public ServerAction type;
-    // UserInfo user;
     public String eventType = "N/A";
 
     public String id = "N/A";
@@ -46,7 +45,7 @@ public class ServerRequest implements Serializable {
 
     // construct ServerAction.reserve
     // construct ServerAction.cancel
-    public ServerRequest(ServerAction type, String user, String eventType, String id, String eventId) {
+    public ServerRequest(ServerAction type, String eventType, String id, String eventId) {
         this.type = type;
         this.eventType = eventType;
         this.id = id;
@@ -62,7 +61,7 @@ public class ServerRequest implements Serializable {
     }
 
     // ServerAction.exchange
-    public ServerRequest(ServerAction type, String user, String id, String old_eventId, String new_eventId,
+    public ServerRequest(ServerAction type, String id, String old_eventId, String new_eventId,
             String new_eventType) {
         this.type = type;
         this.id = id;
