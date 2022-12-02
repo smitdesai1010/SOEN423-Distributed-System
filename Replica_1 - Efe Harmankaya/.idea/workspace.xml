@@ -7,17 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="371515d8-b386-4f81-9d70-917421db3c7f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/util/requests/ExchangeCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DTRS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/requests/CancelRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/CancelRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/requests/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ExchangeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/requests/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ReserveRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/requests/ServerRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,16 +85,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/util/DTRS.java</url>
-          <line>176</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
