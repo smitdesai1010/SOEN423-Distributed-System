@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import FrontEnd.ServerInterface;
 
 public class Client {
-    final String serverURL = "http://192.168.2.14:9000/";
+    final String serverURL = "http://127.0.0.1:9000/?wsdl";
     final String[] serverNames = new String[] { "MTL", "TOR", "VAN" };
     ServerInterface server;
 
@@ -110,6 +110,7 @@ public class Client {
         return input;
     }
 
+    boolean running = false;
     public void start() {
         userId = promptUserId();
         server = getServer();
@@ -120,7 +121,7 @@ public class Client {
 
         String connectedServer = "MTL";
         String input = null;
-        boolean running = input == null;
+        running = input == null;
         while (running) {
             if (input == null) // initial load -> show welcome message
                 System.out.println(
@@ -202,8 +203,8 @@ public class Client {
 
     enum JSONFieldNames {
         MethodName,
-        adminId,
-        participantId,
+        adminID,
+        participantID,
         eventType,
         eventId,
         capacity,
@@ -231,7 +232,7 @@ public class Client {
             case addReservationSlot:
                 // add eventID eventType capacity
                 // MethodName adminId eventType eventId capacity
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 req.put(JSONFieldNames.capacity.key, Integer.parseInt(inputCommands[3]));
@@ -239,14 +240,14 @@ public class Client {
             case removeReservationSlot:
                 // remove eventID eventType
                 // MethodName adminId eventType eventId'
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[1]);
                 break;
             case listReservationSlotAvailable:
                 // list eventType
                 // MethodName adminId eventType
-                req.put(JSONFieldNames.adminId.key, userId);
+                req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[1]));
                 break;
             case cancelTicket:
@@ -255,19 +256,19 @@ public class Client {
                 // reserve clientID eventID eventType
                 // MethodName participantId eventType eventId
                 // ? No need to pass in userId?
-                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                req.put(JSONFieldNames.participantID.key, inputCommands[1]);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[2]);
                 break;
             case getEventSchedule:
                 // get clientID
                 // MethodName participantId
-                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                req.put(JSONFieldNames.participantID.key, inputCommands[1]);
                 break;
             case exchangeTicket:
                 // exchange clientId old_eventID old_eventType new_eventID new_eventType
                 // MethodName participantId eventType eventId new_eventType new_eventId
-                req.put(JSONFieldNames.participantId.key, inputCommands[1]);
+                req.put(JSONFieldNames.participantID.key, inputCommands[1]);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
                 req.put(JSONFieldNames.eventId.key, inputCommands[2]);
                 req.put(JSONFieldNames.new_eventType.key, EventType.fromString(inputCommands[5]));
