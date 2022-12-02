@@ -27,4 +27,9 @@ public class jsonFieldNames {
     public static final String GET_EVENT_SCHEDULE = "getEventSchedule";
     public static final String CANCEL_TICKET = "cancelTicket";
     public static final String EXCHANGE_TICKET = "exchangeTicket";
+
+    // Event Types
+    public static final String ART_GALLERY = "ArtGallery";
+    public static final String CONCERTS = "Concerts";
+    public static final String THEATRE = "Theatre";
 }

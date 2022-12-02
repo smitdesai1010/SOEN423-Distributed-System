@@ -1,0 +1,8 @@
+Dec 01, 2022 11:13:39 PM server.CityReservationSystem cancelTicket
+SEVERE: Failed to cancel ticket. Event with the id 'MTLE121212' cannot be found!
+Dec 01, 2022 11:13:39 PM server.CityReservationSystem cancelTicket
+SEVERE: Failed to cancel ticket. Event with the id 'MTLE999999' cannot be found!
+Dec 01, 2022 11:13:39 PM server.CityReservationSystem checkForReservation
+SEVERE: Event with id 'MTLA010123' does not have a reservation for participant MTLP5555
+Dec 01, 2022 11:13:39 PM server.CityReservationSystem exchangeTicket
+SEVERE: Cannot exchange ticket. 'MTLA010123' is not a reserved for participant MTLP5555
