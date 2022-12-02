@@ -83,7 +83,7 @@ public class DTRS implements IDTRS {
         JSONObject response = new JSONObject();
         String eventLocationId = eventId.substring(0, 3);
         // admin operation on current server
-        if (eventLocationId.equalsIgnoreCase(this.city)) {
+        if (eventLocationId.equalsIgnoreCase(this.prefix)) {
             HashMap<String, EventData> events = this.serverData.get(eventType);
             if (events.containsKey(eventId)) {
                 response.put(jsonFieldNames.Success.key, false);
@@ -126,7 +126,7 @@ public class DTRS implements IDTRS {
         String[] params = new String[] { eventId, eventType.toString() };
         String eventLocationId = eventId.substring(0, 3);
         // admin operation on current server
-        if (eventLocationId.equalsIgnoreCase(this.city)) {
+        if (eventLocationId.equalsIgnoreCase(this.prefix)) {
             HashMap<String, EventData> events = this.serverData.get(eventType);
             if (!events.containsKey(eventId)) {
                 response.put(jsonFieldNames.Success.key, false);
