@@ -27,12 +27,14 @@ public enum City {
         process = createReplica(name, implementationNumber);
 
         if (wait) {
-            System.out.println("restarting a replica please wait... (1 second)");
+           ReplicaManager.logger.info("restarting the " + name + " replica please wait... (1 second)");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            ReplicaManager.logger.info("Started the " + name + " replica");
         }
 
         // making sure process is killed when the RM exits

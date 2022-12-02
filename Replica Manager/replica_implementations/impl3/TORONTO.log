@@ -1,4 +1,0 @@
-Nov 28, 2022 7:47:11 AM server.CityReservationSystem logRecord
-INFO: Request reserveTicket(MTLP0000, TORA011022, ART_GALLERY) SUCCEEDED!
-Response:
-true

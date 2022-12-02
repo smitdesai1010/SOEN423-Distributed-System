@@ -5,6 +5,9 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.*;
 import java.util.HashMap;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ReplicaManager {
     public final static int REPLICA_MANAGER_PORT = 3435;
@@ -15,32 +18,46 @@ public class ReplicaManager {
     private static int nextSequenceNum = 0;
     private static HashMap<Integer, JSONObject> requestQueue;
     private static int replicaImplementationNumber;
+    public static Logger logger;
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
+        logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        try {
+            FileHandler fh = new FileHandler("logs/replica_manager.log");
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (args.length != 1)  {
-           System.out.println("Please provide a replica implementation number");
-           System.out.println("Usage: replica_manager [replica_implementation_num]");
+           logger.severe("Please provide a replica implementation number");
+           logger.severe("Usage: replica_manager [replica_implementation_num]");
            return;
         }
 
         try {
             replicaImplementationNumber = Integer.valueOf(args[0]);
         } catch (NumberFormatException e) {
-            System.out.println("Implementation number could not be formatted as an integer");
+            logger.severe("Implementation number could not be formatted as an integer");
             return;
         }
 
         if (replicaImplementationNumber <= 0 || replicaImplementationNumber >= 4) {
-            System.out.println("Please select an implementation number between 1-3");
+            logger.severe("Please select an implementation number between 1-3");
             return;
         }
+        logger.info("Starting Replica Manager with implementation number [" + replicaImplementationNumber  + "] for replicas...");
 
         // spawning a replica for each city
         City.MONTREAL.startProcess(replicaImplementationNumber);
         City.TORONTO.startProcess(replicaImplementationNumber);
         City.VANCOUVER.startProcess(replicaImplementationNumber);
 
-        // sending and receiving requests
+        logger.info("Joining multicast group...");
         InetAddress group = InetAddress.getByName(GROUP_ADDRESS);
         MulticastSocket multicastSocket = new MulticastSocket(REPLICA_MANAGER_PORT);
         multicastSocket.joinGroup(group);
@@ -48,13 +65,16 @@ public class ReplicaManager {
         int sequenceNumber = 0;
         requestQueue = new HashMap<Integer, JSONObject>();
 
-        //todo: send back port number of RM
-
+        // sending and receiving requests
+        logger.info("Listening for requests...");
         while (true) {
             // Create a packet for the client request
             DatagramPacket frontEndRequestPacket = new DatagramPacket(new byte[1000], 1000);
             // Receive a request using the packet we just created
             multicastSocket.receive(frontEndRequestPacket);
+
+            logger.info("Received a request packet, processing it now...");
+
             String frontEndRequestString = new String(frontEndRequestPacket.getData(), 0, frontEndRequestPacket.getLength());
             JSONParser jsonParser = new JSONParser();
             JSONObject frontEndRequestObject = (JSONObject) jsonParser.parse(frontEndRequestString);
@@ -77,8 +97,10 @@ public class ReplicaManager {
         DatagramPacket serverReplyPacket = new DatagramPacket(new byte[1000], 1000);
         // receiving the reply packet from the server
         try {
+            logger.info("Communicating with the associated replica...");
             udpSocket.receive(serverReplyPacket);
         } catch (SocketTimeoutException e) {
+            logger.info("Communication with replica timed out after 5 seconds...");
             city.startProcess(ReplicaManager.replicaImplementationNumber);
             return sendMessageToLocalHost(city, jsonObject);
         }
@@ -91,18 +113,20 @@ public class ReplicaManager {
     }
 
     private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
-        if (frontEndObject.get(jsonFieldNames.METHOD_NAME).equals("killReplica")) {
-            if (frontEndObject.get("FailedReplicaIP").equals(InetAddress.getLocalHost().getHostAddress())) {
-                System.out.println("Take yourself out of the game before somebody else puts your name to shame...");
-                System.exit(0);
-            } else {
-                return;
+        if (frontEndObject.get(jsonFieldNames.METHOD_NAME).equals("restartReplicas"))  {
+            logger.info("Restarting all replicas...");
+            for (City c : City.values()) {
+                c.startProcess(replicaImplementationNumber);
             }
+            return;
         }
 
         int sequenceNumber = Math.toIntExact((long) frontEndObject.get(jsonFieldNames.SEQUENCE_NUMBER));
         if (sequenceNumber != nextSequenceNum) {
             requestQueue.put(sequenceNumber, frontEndObject);
+            logger.info("Received a request with sequence number [" + sequenceNumber + "] which does not match the next" +
+                    " sequence number [" + nextSequenceNum + "]...");
+            logger.info("Storing it in memory...");
             return;
         }
         nextSequenceNum++;
@@ -113,7 +137,7 @@ public class ReplicaManager {
         } else if (frontEndObject.containsKey(jsonFieldNames.PARTICIPANT_ID)) {
             cityPrefix = ((String) frontEndObject.get(jsonFieldNames.PARTICIPANT_ID)).substring(0, 3);
         } else {
-            System.out.println("There is no participant or admin ID. Failed to identify which server to send the request to");
+            logger.severe("There is no participant or admin ID. Failed to identify which server to send the request to");
             return;
         }
 
@@ -125,7 +149,7 @@ public class ReplicaManager {
             }
         }
         if (city == null) {
-            System.out.println("Something went wrong parsing the city prefix");
+            logger.severe("Something went wrong parsing the city prefix");
             return;
         }
 
@@ -142,12 +166,16 @@ public class ReplicaManager {
         replyObject.put(jsonFieldNames.REPLICAMANAGER_IP, InetAddress.getLocalHost().getHostAddress());
         final byte[] replyObjectData = replyObject.toJSONString().getBytes();
 
+        logger.info("Sending request reply to the FE...");
         // Send the reply
         DatagramPacket serverReplyPacket = new DatagramPacket(replyObjectData, replyObjectData.length, InetAddress.getAllByName(frontendIp)[0], frontendPort);
         DatagramSocket udpSocket = new DatagramSocket();
         udpSocket.send(serverReplyPacket);
+        logger.info("Sent...");
 
-        if (requestQueue.containsKey(nextSequenceNum))
+        if (requestQueue.containsKey(nextSequenceNum)) {
+            logger.info("Processing next sequence number from memory...");
             handleFrontEndObject(requestQueue.get(nextSequenceNum));
+        }
     }
 }
