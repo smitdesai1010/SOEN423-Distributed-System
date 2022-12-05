@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import FrontEnd.ServerInterface;
 
 public class Client {
-    final String serverURL = "http://127.0.0.1:9000/?wsdl";
+    final String serverURL = "http://192.168.43.40:9000/?wsdl";
     final String[] serverNames = new String[] { "MTL", "TOR", "VAN" };
     ServerInterface server;
 

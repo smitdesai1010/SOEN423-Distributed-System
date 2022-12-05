@@ -23,7 +23,7 @@ public class BackendServer {
 	
 	// {(_name) => (_ip:_port)}
 	public static HashMap<String, String> _allServers = null;
-	public static String[] eventTypes = {"ArtGallary", "Theatre", "Concerts"};
+	public static String[] eventTypes = {"`ArtGallery`", "Theatre", "Concerts"};
 	
 	// {(Event)==>{(eventID)==>(cap:Pid-Pid-pid:)}}
 	HashMap<String, HashMap<String, String>> _events = null;
@@ -154,7 +154,7 @@ public class BackendServer {
 	    if(!_participantBookings.containsKey(clientID)) return "";
 		temp = _participantBookings.get(clientID).get("Theatre");
 		allEventIds += temp == null ? "" : temp;
-		temp = _participantBookings.get(clientID).get("ArtGallary");
+		temp = _participantBookings.get(clientID).get("ArtGallery");
 		allEventIds += temp == null ? "" : ("-" + temp);
 		temp = _participantBookings.get(clientID).get("Concerts");
 		allEventIds += temp == null ? "" : ("-" + temp);

@@ -16,16 +16,16 @@ public class BackendServerVAN extends BackendServer {
 	public synchronized void loadEvents() {
 		_events = new HashMap<>();
 		_participantBookings = new HashMap<>();
-		_events.put("ArtGallary", new HashMap<>());
+		_events.put("ArtGallery", new HashMap<>());
 		_events.put("Concerts", new HashMap<>());
 		_events.put("Theatre", new HashMap<>());
 
-		_events.get("ArtGallary").put("VANM010123", "5:MTLP5555-VANP5555");
-		updateParticipantBookings("TORE010123", "ArtGallary", "TORE010123");
-		_events.get("ArtGallary").put("VANA010123", "0:VANP2222-MTLP3333-MTLP5555");
-		updateParticipantBookings("TORE010123", "ArtGallary", "TORE010123");
-		_events.get("ArtGallary").put("VANE010123", "10:VANP2222");
-		updateParticipantBookings("TORE010123", "ArtGallary", "TORE010123");
+		_events.get("ArtGallery").put("VANM010123", "5:MTLP5555-VANP5555");
+		updateParticipantBookings("TORE010123", "ArtGallery", "TORE010123");
+		_events.get("ArtGallery").put("VANA010123", "0:VANP2222-MTLP3333-MTLP5555");
+		updateParticipantBookings("TORE010123", "ArtGallery", "TORE010123");
+		_events.get("ArtGallery").put("VANE010123", "10:VANP2222");
+		updateParticipantBookings("TORE010123", "ArtGallery", "TORE010123");
 
 		_events.get("Concerts").put("VANM020123", "99:MTLP2222");
 		updateParticipantBookings("TORE010123", "Concerts", "TORE010123");
