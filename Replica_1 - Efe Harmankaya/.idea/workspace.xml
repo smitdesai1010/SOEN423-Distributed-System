@@ -12,9 +12,12 @@
       <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/ServerImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/src/main/java/FrontEnd/ServerImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd_Sequencer/target/classes/FrontEnd/ServerImplementation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DTRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica_2 - Ekamjot Singh/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_2 - Ekamjot Singh/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

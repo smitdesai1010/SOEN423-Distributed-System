@@ -12,10 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import util.requests.*;
-
-import javax.xml.ws.Response;
 
 public class DTRS implements IDTRS {
     String city;

@@ -7,11 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae99c258-25b2-418c-b419-d8207a3ad85b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/util/DTRS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Servers/BackendServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServer.java" afterDir="false" />
@@ -40,21 +43,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Concordia University/Courses/Fall2022/SOEN423/Assignments/project2/SOEN423-Distributed-System/Replica_2 - Ekamjot Singh",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Concordia University/Courses/Fall2022/SOEN423/Assignments/project2/SOEN423-Distributed-System/Replica_2 - Ekamjot Singh&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="MtlServer" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Servers.Server" />

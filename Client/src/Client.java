@@ -206,10 +206,10 @@ public class Client {
         adminID,
         participantID,
         eventType,
-        eventId,
+        eventID,
         capacity,
         new_eventType,
-        new_eventId;
+        new_eventID;
 
         String key;
 
@@ -234,7 +234,7 @@ public class Client {
                 // MethodName adminId eventType eventId capacity
                 req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
-                req.put(JSONFieldNames.eventId.key, inputCommands[1]);
+                req.put(JSONFieldNames.eventID.key, inputCommands[1]);
                 req.put(JSONFieldNames.capacity.key, Integer.parseInt(inputCommands[3]));
                 break;
             case removeReservationSlot:
@@ -242,7 +242,7 @@ public class Client {
                 // MethodName adminId eventType eventId'
                 req.put(JSONFieldNames.adminID.key, userId);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[2]));
-                req.put(JSONFieldNames.eventId.key, inputCommands[1]);
+                req.put(JSONFieldNames.eventID.key, inputCommands[1]);
                 break;
             case listReservationSlotAvailable:
                 // list eventType
@@ -258,7 +258,7 @@ public class Client {
                 // ? No need to pass in userId?
                 req.put(JSONFieldNames.participantID.key, inputCommands[1]);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
-                req.put(JSONFieldNames.eventId.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventID.key, inputCommands[2]);
                 break;
             case getEventSchedule:
                 // get clientID
@@ -270,9 +270,9 @@ public class Client {
                 // MethodName participantId eventType eventId new_eventType new_eventId
                 req.put(JSONFieldNames.participantID.key, inputCommands[1]);
                 req.put(JSONFieldNames.eventType.key, EventType.fromString(inputCommands[3]));
-                req.put(JSONFieldNames.eventId.key, inputCommands[2]);
+                req.put(JSONFieldNames.eventID.key, inputCommands[2]);
                 req.put(JSONFieldNames.new_eventType.key, EventType.fromString(inputCommands[5]));
-                req.put(JSONFieldNames.new_eventId.key, inputCommands[4]);
+                req.put(JSONFieldNames.new_eventID.key, inputCommands[4]);
                 break;
             default:
                 return null;
