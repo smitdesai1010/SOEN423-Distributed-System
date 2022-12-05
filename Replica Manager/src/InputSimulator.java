@@ -24,7 +24,7 @@ public class InputSimulator {
         JSONObject samplePayload1 = new JSONObject();
         samplePayload1.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.ADD_RESERVATION_SLOT);
         samplePayload1.put(jsonFieldNames.ADMIN_ID, "MTLA1234");
-        samplePayload1.put(jsonFieldNames.EVENT_ID, "MTLNewEvent");
+        samplePayload1.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload1.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload1.put(jsonFieldNames.CAPACTIY, 55);
         samplePayload1.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
@@ -35,7 +35,7 @@ public class InputSimulator {
         JSONObject samplePayload2 = new JSONObject();
         samplePayload2.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.ADD_RESERVATION_SLOT);
         samplePayload2.put(jsonFieldNames.ADMIN_ID, "MTLA1234");
-        samplePayload2.put(jsonFieldNames.EVENT_ID, "MTLNewEvent");
+        samplePayload2.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload2.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload2.put(jsonFieldNames.CAPACTIY, 55);
         samplePayload2.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
@@ -46,7 +46,7 @@ public class InputSimulator {
         JSONObject samplePayload3 = new JSONObject();
         samplePayload3.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.RESERVE_TICKET);
         samplePayload3.put(jsonFieldNames.PARTICIPANT_ID, "MTLP0001");
-        samplePayload3.put(jsonFieldNames.EVENT_ID, "MTLE121212");
+        samplePayload3.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload3.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload3.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload3.put(jsonFieldNames.FRONTEND_IP, "localhost");
@@ -56,7 +56,7 @@ public class InputSimulator {
         JSONObject samplePayload4 = new JSONObject();
         samplePayload4.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.RESERVE_TICKET);
         samplePayload4.put(jsonFieldNames.PARTICIPANT_ID, "MTLP0001");
-        samplePayload4.put(jsonFieldNames.EVENT_ID, "MTLE121212");
+        samplePayload4.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload4.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload4.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload4.put(jsonFieldNames.FRONTEND_IP, "localhost");
@@ -66,7 +66,7 @@ public class InputSimulator {
         JSONObject samplePayload5 = new JSONObject();
         samplePayload5.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.CANCEL_TICKET);
         samplePayload5.put(jsonFieldNames.PARTICIPANT_ID, "MTLP0001");
-        samplePayload5.put(jsonFieldNames.EVENT_ID, "MTLE121212");
+        samplePayload5.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload5.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload5.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload5.put(jsonFieldNames.FRONTEND_IP, "localhost");
@@ -76,7 +76,7 @@ public class InputSimulator {
         JSONObject samplePayload6 = new JSONObject();
         samplePayload6.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.CANCEL_TICKET);
         samplePayload6.put(jsonFieldNames.PARTICIPANT_ID, "MTLP5555");
-        samplePayload6.put(jsonFieldNames.EVENT_ID, "MTLE999999");
+        samplePayload6.put(jsonFieldNames.EVENT_ID, "MTLE130223");
         samplePayload6.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload6.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload6.put(jsonFieldNames.FRONTEND_IP, "localhost");
@@ -85,10 +85,10 @@ public class InputSimulator {
         // Test Case 8
         JSONObject samplePayload7 = new JSONObject();
         samplePayload7.put(jsonFieldNames.METHOD_NAME, jsonFieldNames.EXCHANGE_TICKET);
-        samplePayload7.put(jsonFieldNames.PARTICIPANT_ID, "MTLP5555");
+        samplePayload7.put(jsonFieldNames.PARTICIPANT_ID, "MTLP1111");
         samplePayload7.put(jsonFieldNames.EVENT_ID, "MTLA010123");
         samplePayload7.put(jsonFieldNames.EVENT_TYPE, jsonFieldNames.ART_GALLERY);
-        samplePayload7.put(jsonFieldNames.NEW_EVENT_ID, "MTLE010122");
+        samplePayload7.put(jsonFieldNames.NEW_EVENT_ID, "MTLM010123");
         samplePayload7.put(jsonFieldNames.NEW_EVENT_TYPE, jsonFieldNames.ART_GALLERY);
         samplePayload7.put(jsonFieldNames.FRONTEND_PORT, FRONT_END_PORT);
         samplePayload7.put(jsonFieldNames.FRONTEND_IP, "localhost");
@@ -111,7 +111,7 @@ public class InputSimulator {
         multicast(samplePayload2);
         multicast(samplePayload3);
         multicast(samplePayload4);
-        multicast(softwareFailurePayload);
+        //multicast(softwareFailurePayload);
         multicast(samplePayload5);
         multicast(samplePayload6);
         multicast(samplePayload7);

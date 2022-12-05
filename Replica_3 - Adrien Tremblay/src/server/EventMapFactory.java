@@ -44,6 +44,11 @@ public class EventMapFactory {
         artGalleryEvent3.addReservationSlot(10);
         eventMap.get(EventType.ART_GALLERY).put(artGalleryEvent3.getId(), artGalleryEvent3);
 
+        // SPECIAL JUST FOR ME EVENT
+        Event artGalleryEvent4 = new Event(City.MONTREAL, TimeSlot.EVENING, new GregorianCalendar(2023, 02, 13));
+        System.out.println(artGalleryEvent4.getId());
+        eventMap.get(EventType.ART_GALLERY).put(artGalleryEvent4.getId(), artGalleryEvent4);
+
         // Concert Events
         Event concertEvent1 = new Event(City.MONTREAL, TimeSlot.MORNING, new GregorianCalendar(2023, 01, 02));
         concertEvent1.addReservationSlot(81);
