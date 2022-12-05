@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Replica_2 - Ekamjot Singh:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ae99c258-25b2-418c-b419-d8207a3ad85b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Replica_2 - Ekamjot Singh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Replica_2 - Ekamjot Singh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackendServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackendServerMTL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackendServerTOR.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackendServerVAN.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientUDP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerUDP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServiceInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServiceMTL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServiceTOR.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServiceVAN.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jsonFieldNames.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerMTL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerMTL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerTOR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerTOR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerVAN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerVAN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ServerUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServerUDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceMTL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceMTL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceTOR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceTOR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceVAN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceVAN.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +55,16 @@
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="MtlServer" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Servers.Server" />
+      <module name="Replica_2 - Ekamjot Singh" />
+      <option name="PROGRAM_PARAMETERS" value="Montreal" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -58,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669959269022</updated>
-      <workItem from="1669959270131" duration="790000" />
+      <workItem from="1669959270131" duration="8847000" />
     </task>
     <servers />
   </component>

@@ -62,6 +62,50 @@ public class ServerUDP extends Thread{
 				if(_mainBackendServer._events.get(arg[1]) == null) return "No available reservation slots";
 				return _mainBackendServer._events.get(arg[1]).toString();
 			}
+			case "removeReservationSlot":{
+				String eventID = arg[1];
+				String eventType = arg[2];
+
+				if (_mainBackendServer._events.get(eventType) == null || _mainBackendServer._events.get(eventType).isEmpty() ||
+						_mainBackendServer._events.get(eventType).get(eventID) == null ||
+						_mainBackendServer._events.get(eventType).get(eventID).isEmpty() )
+				{
+					_mainBackendServer.log("Reservation Slot is already removed.");
+					return "true";
+				}
+
+				String[] eventDetails = _mainBackendServer._events.get(eventType).get(eventID).split(":");
+
+				if (eventDetails.length >= 2 && !eventDetails[1].isEmpty()) { // checking if someone already booked the slot
+					_mainBackendServer.log("ERROR: you cannot remove the slot since it is already booked by someone.");
+					return "false";
+				}
+				_mainBackendServer._events.get(eventType).remove(eventID);
+				_mainBackendServer.log("Reservation Slot is removed Successfully.");
+				return "true";
+			}
+			case "addReservationSlot": {
+				String eventID = arg[1];
+				String eventType = arg[2];
+				String capacity = arg[3];
+
+				if (!_mainBackendServer._events.containsKey(eventType)) {
+					_mainBackendServer.log("The reservation slot is already available");
+					return "false";
+				}
+
+				synchronized (this) {
+					if (_mainBackendServer._events.get(eventType) == null || _mainBackendServer._events.get(eventType).isEmpty()) {
+						_mainBackendServer._events.put(eventType, new HashMap<String, String>());
+						_mainBackendServer._events.get(eventType).put(eventID, capacity);
+						_mainBackendServer.log("Reservation slot was successfully added for " + eventID + " " + eventType + " " + capacity);
+						return "true";
+					}
+				}
+
+				_mainBackendServer.log("addReservation Request failed due to some internal error.");
+				return "false";
+			}
 			case "getMySchedule": {
 				HashMap<String, String> localSchedule = _mainBackendServer._participantBookings.get(arg[1]);
 			    String s = (localSchedule != null ) ? localSchedule.toString() : "{No bookings to show}";

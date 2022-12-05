@@ -1,7 +1,6 @@
 package Servers;
 
 import org.json.simple.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,59 +21,112 @@ public class ServiceVAN implements ServiceInterface{
     @Override
     public JSONObject addReservationSlot(String eventID, String eventType, int capacity) {
         delegateVAN.log("REQUEST: addReservationSlot called for eventID " + eventID + " Type: " + eventType + " capacity: " + capacity);
-        if (!delegateVAN._events.containsKey(eventType)) {
+        if(eventID.substring(0,3).equals(delegateVAN._name)){
+            if (!delegateVAN._events.containsKey(eventType)) {
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "The reservation slot is already available");
+                delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            synchronized (this) {
+                if (delegateVAN._events.get(eventType) == null || delegateVAN._events.get(eventType).isEmpty()) {
+                    delegateVAN._events.put(eventType, new HashMap<String, String>());
+                    delegateVAN._events.get(eventType).put(eventID, Integer.toString(capacity));
+                    replyObjectJSON.put(SUCCESS, true);
+                    replyObjectJSON.put( DATA,
+                            "Reservation slot was successfully added for " + eventID + " " + eventType + " " + capacity);
+                    delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                    return replyObjectJSON;
+                }
+            }
+
             replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "The reservation slot is already available");
+            replyObjectJSON.put( DATA, "addReservation Request failed due to some internal error.");
+            delegateVAN.log(replyObjectJSON.get(DATA).toString());
+            return replyObjectJSON;
+        }
+        else {
+            String[] config = delegateVAN._allServers.get(eventID.substring(0, 3)).split(":");
+            String request = "addReservationSlot:"+ eventID + ":" + eventType + ":" + capacity;
+            ClientUDP udpClient = new ClientUDP(config[0], config[1], request);
+            udpClient.start();
+            try {
+                udpClient.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            ArrayList<String> s = ClientUDP._responses;
+            if (s.get(0).equals("true")) {
+                ClientUDP._responses.clear();
+                replyObjectJSON.put(SUCCESS, true);
+                replyObjectJSON.put( DATA, "The Reservation slot was removed successfully!");
+                delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+
+            }
+            replyObjectJSON.put(SUCCESS, false);
+            replyObjectJSON.put( DATA, "The Reservation slot was Not removed successfully!");
             delegateVAN.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
         }
 
-        synchronized (this) {
-            if (delegateVAN._events.get(eventType) == null || delegateVAN._events.get(eventType).isEmpty()) {
-                delegateVAN._events.put(eventType, new HashMap<String, String>());
-                delegateVAN._events.get(eventType).put(eventID, Integer.toString(capacity));
-                replyObjectJSON.put(SUCCESS, true);
-                replyObjectJSON.put( DATA,
-                        "Reservation slot was successfully added for " + eventID + " " + eventType + " " + capacity);
-                delegateVAN.log(replyObjectJSON.get(DATA).toString());
-                return replyObjectJSON;
-            }
-        }
-
-        replyObjectJSON.put(SUCCESS, false);
-        replyObjectJSON.put( DATA, "addReservation Request failed due to some internal error.");
-        delegateVAN.log(replyObjectJSON.get(DATA).toString());
-        return replyObjectJSON;
     }
 
     @Override
     public JSONObject removeReservationSlot(String eventID, String eventType) {
-        delegateVAN.log("REQUEST: removeReservationSlot: " + eventID + " " + eventType);
-        if (delegateVAN._events.get(eventType) == null || delegateVAN._events.get(eventType).isEmpty() ||
-                delegateVAN._events.get(eventType).get(eventID) == null ||
-                delegateVAN._events.get(eventType).get(eventID).isEmpty() )
-        {
-            replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "ERROR: Reservation Slot of type "+eventType + " and ID " + eventID +
-                    " is not available.");
+        if(eventID.substring(0,3).equals(delegateVAN._name)){
+            delegateVAN.log("REQUEST: removeReservationSlot: " + eventID + " " + eventType);
+            if (delegateVAN._events.get(eventType) == null || delegateVAN._events.get(eventType).isEmpty() ||
+                    delegateVAN._events.get(eventType).get(eventID) == null ||
+                    delegateVAN._events.get(eventType).get(eventID).isEmpty() )
+            {
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "ERROR: Reservation Slot of type "+eventType + " and ID " + eventID +
+                        " is not available.");
+                delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            String[] eventDetails = delegateVAN._events.get(eventType).get(eventID).split(":");
+
+            if (eventDetails.length >= 2 && !eventDetails[1].isEmpty()) { // checking if someone already booked the slot
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "ERROR: you cannot remove the slot since it is already booked by someone.");
+                delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            delegateVAN._events.get(eventType).remove(eventID);
+            replyObjectJSON.put(SUCCESS, true);
+            replyObjectJSON.put( DATA, "Reservation Slot is removed Successfully.");
             delegateVAN.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
         }
-
-        String[] eventDetails = delegateVAN._events.get(eventType).get(eventID).split(":");
-
-        if (eventDetails.length >= 2 && !eventDetails[1].isEmpty()) { // checking if someone already booked the slot
+        else {
+            String[] config = delegateVAN._allServers.get(eventID.substring(0, 3)).split(":");
+            String request = "removeReservationSlot:"+ eventID + ":" + eventType;
+            ClientUDP udpClient = new ClientUDP(config[0], config[1], request);
+            udpClient.start();
+            try {
+                udpClient.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            ArrayList<String> s = ClientUDP._responses;
+            if (s.get(0).equals("true")) {
+                ClientUDP._responses.clear();
+                replyObjectJSON.put(SUCCESS, true);
+                replyObjectJSON.put( DATA, "The Reservation Slot was removed Successfully.");
+                delegateVAN.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
             replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "ERROR: you cannot remove the slot since it is already booked by someone.");
+            replyObjectJSON.put( DATA, "Reservation Slot is not removed Successfully.");
             delegateVAN.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
-        }
 
-        delegateVAN._events.get(eventType).remove(eventID);
-        replyObjectJSON.put(SUCCESS, true);
-        replyObjectJSON.put( DATA, "Reservation Slot is removed Successfully.");
-        delegateVAN.log(replyObjectJSON.get(DATA).toString());
-        return replyObjectJSON;
+        }
     }
 
     @Override

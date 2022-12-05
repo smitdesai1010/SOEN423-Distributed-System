@@ -170,14 +170,19 @@ public class BackendServer {
 //		return Integer.parseInt(details.substring(0, details.indexOf(':')));
 	}
 
-	public void updateParticipantBookings(String clientID, String eventType, String eventID) {
-		_participantBookings.putIfAbsent(clientID, new HashMap<>());
-		_participantBookings.get(clientID).putIfAbsent(eventType, "");
-		String currentBookings = _participantBookings.get(clientID).get(eventType);
-		if(currentBookings.isEmpty())
-			_participantBookings.get(clientID).put(eventType,eventID);
-		else
-			_participantBookings.get(clientID).put(eventType, currentBookings + "-" + eventID);
+	public void updateParticipantBookings(String clientId, String eventType, String eventID) {
+		String[] clientIDs = clientId.split("-");
+		if(clientIDs.length < 1) return;
+		for(String clientID : clientIDs){
+			_participantBookings.putIfAbsent(clientID, new HashMap<>());
+			_participantBookings.get(clientID).putIfAbsent(eventType, "");
+			String currentBookings = _participantBookings.get(clientID).get(eventType);
+			if(currentBookings.isEmpty())
+				_participantBookings.get(clientID).put(eventType,eventID);
+			else
+				_participantBookings.get(clientID).put(eventType, currentBookings + "-" + eventID);
+		}
+
 	}
 	
 }
