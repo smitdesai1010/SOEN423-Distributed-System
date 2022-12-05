@@ -90,7 +90,7 @@ public class ServerImplementation implements ServerInterface {
             String requestString = new String(request.getData()).trim();
             JSONObject requestObject = (JSONObject) parser.parse(requestString);
 
-            logger.addToLogs("Received Response from RM - "+ responseData.size() + 1 +": " + requestObject.toString());
+            logger.addToLogs("Received Response from RM - "+ (responseData.size() + 1) +": " + requestObject.toString());
             responseData.add(requestObject);
         }
 

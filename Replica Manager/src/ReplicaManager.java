@@ -115,6 +115,7 @@ public class ReplicaManager {
     private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
         if (frontEndObject.get(jsonFieldNames.METHOD_NAME).equals("restartReplicas"))  {
             logger.info("Restarting all replicas...");
+            ++nextSequenceNum;
             for (City c : City.values()) {
                 c.startProcess(replicaImplementationNumber);
             }
