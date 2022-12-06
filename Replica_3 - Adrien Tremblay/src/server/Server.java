@@ -121,7 +121,7 @@ public class Server {
                     }
                     case "getEventSchedule": {
                         String participantId = (String) clientRequestObject.get(jsonFieldNames.PARTICIPANT_ID);
-                        replyString = eventMapToString(cityReservationSystem.getEventMap(), cityReservationSystem.getCity(), participantId);
+                        replyString = cityReservationSystem.getEventSchedule(participantId);
                         break;
                     }
                     case "cancelTicket": {
