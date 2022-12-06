@@ -1,38 +1,38 @@
-Dec 05, 2022 5:10:52 PM ReplicaManager main
+Dec 05, 2022 9:07:50 PM ReplicaManager main
 INFO: Starting Replica Manager with implementation number [3] for replicas...
-Dec 05, 2022 5:10:52 PM City startProcess
+Dec 05, 2022 9:07:50 PM City startProcess
 INFO: Started the Montreal replica
-Dec 05, 2022 5:10:52 PM City startProcess
+Dec 05, 2022 9:07:50 PM City startProcess
 INFO: Started the Toronto replica
-Dec 05, 2022 5:10:52 PM City startProcess
+Dec 05, 2022 9:07:50 PM City startProcess
 INFO: Started the Vancouver replica
-Dec 05, 2022 5:10:52 PM ReplicaManager main
+Dec 05, 2022 9:07:50 PM ReplicaManager main
 INFO: Joining multicast group...
-Dec 05, 2022 5:10:52 PM ReplicaManager main
+Dec 05, 2022 9:07:50 PM ReplicaManager main
 INFO: Listening for requests...
-Dec 05, 2022 5:11:12 PM ReplicaManager main
+Dec 05, 2022 9:07:57 PM ReplicaManager main
 INFO: Received a request packet, processing it now...
-Dec 05, 2022 5:11:12 PM ReplicaManager sendMessageToLocalHost
+Dec 05, 2022 9:07:57 PM ReplicaManager sendMessageToLocalHost
 INFO: Communicating with the associated replica...
-Dec 05, 2022 5:11:12 PM ReplicaManager handleFrontEndObject
+Dec 05, 2022 9:07:57 PM ReplicaManager handleFrontEndObject
 INFO: Sending request reply to the FE...
-Dec 05, 2022 5:11:12 PM ReplicaManager handleFrontEndObject
+Dec 05, 2022 9:07:57 PM ReplicaManager handleFrontEndObject
 INFO: Sent...
-Dec 05, 2022 5:11:22 PM ReplicaManager main
+Dec 05, 2022 9:08:23 PM ReplicaManager main
 INFO: Received a request packet, processing it now...
-Dec 05, 2022 5:11:22 PM ReplicaManager sendMessageToLocalHost
+Dec 05, 2022 9:08:23 PM ReplicaManager sendMessageToLocalHost
 INFO: Communicating with the associated replica...
-Dec 05, 2022 5:11:22 PM ReplicaManager handleFrontEndObject
+Dec 05, 2022 9:08:23 PM ReplicaManager handleFrontEndObject
 INFO: Sending request reply to the FE...
-Dec 05, 2022 5:11:22 PM ReplicaManager handleFrontEndObject
+Dec 05, 2022 9:08:23 PM ReplicaManager handleFrontEndObject
 INFO: Sent...
-Dec 05, 2022 5:11:22 PM ReplicaManager main
+Dec 05, 2022 9:08:23 PM ReplicaManager main
 INFO: Received a request packet, processing it now...
-Dec 05, 2022 5:11:22 PM ReplicaManager handleFrontEndObject
+Dec 05, 2022 9:08:23 PM ReplicaManager handleFrontEndObject
 INFO: Restarting all replicas...
-Dec 05, 2022 5:11:22 PM City startProcess
+Dec 05, 2022 9:08:23 PM City startProcess
 INFO: restarting the Montreal replica please wait... (1 second)
-Dec 05, 2022 5:11:23 PM City startProcess
+Dec 05, 2022 9:08:24 PM City startProcess
 INFO: restarting the Toronto replica please wait... (1 second)
-Dec 05, 2022 5:11:24 PM City startProcess
+Dec 05, 2022 9:08:25 PM City startProcess
 INFO: restarting the Vancouver replica please wait... (1 second)
