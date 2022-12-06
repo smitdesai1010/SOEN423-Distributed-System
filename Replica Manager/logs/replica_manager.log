@@ -1,0 +1,12 @@
+Dec 06, 2022 3:29:13 PM ReplicaManager main
+INFO: Starting Replica Manager with implementation number [3] for replicas...
+Dec 06, 2022 3:29:13 PM City startProcess
+INFO: Started the Montreal replica
+Dec 06, 2022 3:29:13 PM City startProcess
+INFO: Started the Toronto replica
+Dec 06, 2022 3:29:13 PM City startProcess
+INFO: Started the Vancouver replica
+Dec 06, 2022 3:29:13 PM ReplicaManager main
+INFO: Joining multicast group...
+Dec 06, 2022 3:29:13 PM ReplicaManager main
+INFO: Listening for requests...
