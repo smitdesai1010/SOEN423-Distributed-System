@@ -9,22 +9,13 @@
     <list default="true" id="ae99c258-25b2-418c-b419-d8207a3ad85b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Montreal.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Toronto.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/Vancouver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl1/replica.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/replica_implementations/impl2/replica.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/logs/replica_manager.log.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/ReplicaManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica Manager/out/production/Replica Manager/ReplicaManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/util/DTRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Replica_1 - Efe Harmankaya/src/util/DTRS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Replica_2___Ekamjot_Singh_jar/Replica_2 - Ekamjot Singh.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerMTL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerMTL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerTOR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerTOR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/BackendServerVAN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/BackendServerVAN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/ServerUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServerUDP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceMTL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceMTL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceTOR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceTOR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servers/ServiceVAN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servers/ServiceVAN.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

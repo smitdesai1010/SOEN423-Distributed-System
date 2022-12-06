@@ -46,8 +46,8 @@ public class ReplicaManager {
             return;
         }
 
-        if (replicaImplementationNumber <= 0 || replicaImplementationNumber >= 4) {
-            logger.severe("Please select an implementation number between 1-3");
+        if (replicaImplementationNumber <= 0 || replicaImplementationNumber >= 5) {
+            logger.severe("Please select an implementation number between 1-4");
             return;
         }
         logger.info("Starting Replica Manager with implementation number [" + replicaImplementationNumber  + "] for replicas...");
