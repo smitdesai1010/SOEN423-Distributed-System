@@ -18,10 +18,10 @@ public class Server {
         MethodName,
         adminID,
         participantID,
-        eventId,
+        eventID,
         eventType,
         capacity,
-        new_eventId,
+        new_eventID,
         new_eventType,
 
         Success,
@@ -36,11 +36,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        // args = new String[] { "Montreal" };
-        // if (args.length != 1) {
-        // System.out.println("Incorrect argument provided");
-        // return;
-        // }
         DTRS dtrs;
         try {
             dtrs = new DTRS(args[0]);
@@ -96,14 +91,14 @@ public class Server {
                         System.out.println("DYING");
                         return;
                     case "addReservationSlot":
-                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventId.key);
+                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventID.key);
                         eventType = EventType
                                 .valueOf(((String) clientRequestObject.get(jsonFieldNames.eventType.key)));
                         int capacity = Math.toIntExact((Long) clientRequestObject.get(jsonFieldNames.capacity.key));
                         response = dtrs.addReservationSlot(eventId, eventType, capacity);
                         break;
                     case "removeReservationSlot":
-                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventId.key);
+                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventID.key);
                         eventType = EventType
                                 .valueOf((String) clientRequestObject.get(jsonFieldNames.eventType.key));
                         response = dtrs.removeReservationSlot(eventId, eventType);
@@ -116,7 +111,7 @@ public class Server {
                         break;
                     case "reserveTicket":
                         participantId = (String) clientRequestObject.get(jsonFieldNames.participantID.key);
-                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventId.key);
+                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventID.key);
                         eventType = EventType
                                 .valueOf((String) clientRequestObject.get(jsonFieldNames.eventType.key));
                         response = dtrs.reserveTicket(participantId, eventId, eventType);
@@ -127,16 +122,16 @@ public class Server {
                         break;
                     case "cancelTicket":
                         participantId = (String) clientRequestObject.get(jsonFieldNames.participantID.key);
-                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventId.key);
+                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventID.key);
                         eventType = EventType
                                 .valueOf((String) clientRequestObject.get(jsonFieldNames.eventType.key));
                         response = dtrs.cancelTicket(participantId, eventId, eventType);
                         break;
                     case "exchangeTicket": {
                         participantId = (String) clientRequestObject.get(jsonFieldNames.participantID.key);
-                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventId.key);
+                        eventId = (String) clientRequestObject.get(jsonFieldNames.eventID.key);
                         eventType = EventType.valueOf((String) clientRequestObject.get(jsonFieldNames.eventType.key));
-                        String new_eventId = (String) clientRequestObject.get(jsonFieldNames.new_eventId.key);
+                        String new_eventId = (String) clientRequestObject.get(jsonFieldNames.new_eventID.key);
                         EventType new_eventType = EventType
                                 .valueOf((String) clientRequestObject.get(jsonFieldNames.new_eventType.key));
                         response = dtrs.exchangeTicket(participantId, eventId, eventType, new_eventId, new_eventType);

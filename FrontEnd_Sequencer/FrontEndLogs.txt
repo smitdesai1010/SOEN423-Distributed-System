@@ -16,3 +16,832 @@ Starting UDP Server to wait for responses
 Checking for Byzantine Failure
 Sending back the response to the Client: Internal Server Error
 =========================================
+=========================================
+Timestamp: 2022.12.05.15.25.05
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":64245,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.25.15
+
+Received request
+Received object for Multicast: {"sequenceNumber":1,"port":56200,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.29.43
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":62531,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"Schedule returned with 3 bookings.","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Schedule returned with 3 bookings.
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.30.22
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":57924,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"Schedule returned with 3 bookings.","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Schedule returned with 3 bookings.
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.34.44
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":51097,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"Schedule returned with 3 bookings.","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Schedule returned with 3 bookings.
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.42.06
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":61607,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"192.168.43.210","Data":"[{VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: [{VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.51.46
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":62057,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 11: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 21: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.52.19
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":1,"port":50439,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 11: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 21: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.15.52.47
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":2,"port":65083,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 2
+Starting UDP Server to wait for responses
+Received Response from RM - 01: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 11: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 21: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.07.12
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":61251,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Received Response from RM - 2: {"IP":"127.0.1.1","Data":"ART_GALLERYS: MTLA010123 0, MTLE010123 10, MTLM010123 5.TORM010123 5, TORA010123 0, TORE010123 10.VANE010123 10, VANM010123 5, VANA010123 0.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: [{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.14.51
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":56049,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.15.09
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":1,"port":59546,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.15.54
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":2,"port":59630,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 2
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.15.56
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":3,"port":59632,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 3
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.15.57
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":4,"port":59634,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 4
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.15.58
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":5,"port":59636,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 5
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.16.00
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":6,"port":59638,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 6
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.16.02
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":7,"port":59640,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 7
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Schedule returned with 3 bookings.
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.16.04
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":8,"port":59642,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 8
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"127.0.1.1","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.16.08
+
+Received request
+Received object for Multicast: {"sequenceNumber":9,"port":64005,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 9
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Received Response from RM - 3: {"IP":"127.0.1.1","Data":"ART_GALLERYS: MTLA010123 0, MTLE010123 10, MTLM010123 5.TORM010123 5, TORA010123 0, TORE010123 10.VANE010123 10, VANM010123 5, VANA010123 0.","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: ART_GALLERYS: MTLA010123 0, MTLE010123 10, MTLM010123 5.TORM010123 5, TORA010123 0, TORE010123 10.VANE010123 10, VANM010123 5, VANA010123 0.
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.17.37
+
+Received request
+Received object for Multicast: {"sequenceNumber":10,"port":52451,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 10
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"[{VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 2: {"IP":"127.0.1.1","Data":"ART_GALLERYS: MTLA010123 0, MTLE010123 10, MTLM010123 5.TORM010123 5, TORA010123 0, TORE010123 10.VANE010123 10, VANM010123 5, VANA010123 0.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.42.13
+
+Received request
+Received object for Multicast: {"participantID":"MTLP5555","sequenceNumber":0,"port":60948,"MethodName":"getEventSchedule","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"---------------------MONTREAL---------------------\n-> ART_GALLERY Events\n    -> MTLM010123, Reservations: [MTLP5555, TORP5555] (2 \/ 7)\n-> CONCERT Events\n    -> MTLA020123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n-> THEATRE Events\n    -> MTLA030123, Reservations: [MTLP4444, MTLP5555, VANP5555, VANP2222] (4 \/ 5)\n    -> MTLM030123, Reservations: [MTLP2222, MTLP5555] (2 \/ 82)\n","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Schedule returned with 3 bookings.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Montreal\n\tConcerts : [MTLA020123]\n\tArtGallery : [MTLA010123, MTLM010123]\n\tTheatre : [MTLA030123, MTLM030123]\nToronto\n\tConcerts : [TORA020123]\n\tArtGallery : [TORM010123, TORA010123]\n\tTheatre : [TORA030123, TORM030123]\nVancouver\n\tConcerts : [VANA020123]\n\tArtGallery : [VANM010123, VANA010123]\n\tTheatre : [VANA030123, VANM030123]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Montreal
+	Concerts : [MTLA020123]
+	ArtGallery : [MTLA010123, MTLM010123]
+	Theatre : [MTLA030123, MTLM030123]
+Toronto
+	Concerts : [TORA020123]
+	ArtGallery : [TORM010123, TORA010123]
+	Theatre : [TORA030123, TORM030123]
+Vancouver
+	Concerts : [VANA020123]
+	ArtGallery : [VANM010123, VANA010123]
+	Theatre : [VANA030123, VANM030123]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.42.48
+
+Received request
+Received object for Multicast: {"eventID":"MTLE130223","sequenceNumber":1,"port":54497,"adminID":"MTLA1234","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":55}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"addReservation Request failed due to some internal error.","Success":false}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Successfully added eventId: MTLE130223","Success":true}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.136
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: Successfully added eventId: MTLE130223
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.57.22
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":51159,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.16.58.01
+
+Received request
+Received object for Multicast: {"eventID":"MTLE130223","sequenceNumber":1,"port":51163,"adminID":"MTLA1234","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":55}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"addReservation Request failed due to some internal error.","Success":false}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Successfully added eventId: MTLE130223","Success":true}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.136
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: Successfully added eventId: MTLE130223
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.01.10
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":53865,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"[{VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.01.30
+
+Received request
+Received object for Multicast: {"eventID":"MTLE010122","sequenceNumber":1,"port":53869,"adminID":"MTLA1234","MethodName":"removeReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":false}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"ERROR: Reservation Slot of type ArtGallery and ID MTLE010122 is not available.","Success":false}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Successfully removed eventId: MTLE010122","Success":true}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.210
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: ERROR: Reservation Slot of type ArtGallery and ID MTLE010122 is not available.
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.05.10
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":50596,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"[{VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.06.51
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":62450,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.11.12
+
+Received request
+Received object for Multicast: {"eventID":"MTLE130223","sequenceNumber":0,"port":60040,"adminID":"MTLA1234","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":55}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"Reservation slot was successfully added for MTLE130223 ArtGallery 55","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.210","Data":"Successfully added eventId: MTLE130223","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.40","Data":"","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: 
+=========================================
+=========================================
+Timestamp: 2022.12.05.17.11.22
+
+Received request
+Received object for Multicast: {"eventID":"MTLE130223","sequenceNumber":1,"port":64297,"adminID":"MTLA1234","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":55}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":false}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"Reservation slot was successfully added for MTLE130223 ArtGallery 55","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Unable to add eventId: MTLE130223 as it already exists.","Success":false}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.136
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: Unable to add eventId: MTLE130223 as it already exists.
+=========================================
+=========================================
+Timestamp: 2022.12.05.18.01.37
+
+Received request
+Received object for Multicast: {"eventID":"MTLM011022","sequenceNumber":0,"port":54912,"adminID":"MTLA0000","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":7}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"Reservation slot was successfully added for MTLM011022 ArtGallery 7","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Reservation slot was successfully added for MTLM011022 ArtGallery 7
+=========================================
+=========================================
+Timestamp: 2022.12.05.18.01.42
+
+Received request
+Received object for Multicast: {"eventID":"MTLM011022","sequenceNumber":1,"port":54914,"adminID":"MTLA0000","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":7}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"Reservation slot was successfully added for MTLM011022 ArtGallery 7","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: Reservation slot was successfully added for MTLM011022 ArtGallery 7
+=========================================
+=========================================
+Timestamp: 2022.12.05.18.05.28
+
+Received request
+Received object for Multicast: {"eventID":"MTLM011022","sequenceNumber":0,"port":53207,"adminID":"MTLA0000","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":7}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"Reservation slot is already available for MTLM011022 ArtGallery 7","Success":false}
+Checking for Byzantine Failure
+Sending back the response to the Client: Reservation slot is already available for MTLM011022 ArtGallery 7
+=========================================
+=========================================
+Timestamp: 2022.12.05.18.05.33
+
+Received request
+Received object for Multicast: {"eventID":"MTLM011022","sequenceNumber":1,"port":53209,"adminID":"MTLA0000","MethodName":"addReservationSlot","eventType":"ArtGallery","frontend-IP":"192.168.43.40","capacity":7}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"Reservation slot is already available for MTLM011022 ArtGallery 7","Success":false}
+Checking for Byzantine Failure
+Sending back the response to the Client: Reservation slot is already available for MTLM011022 ArtGallery 7
+=========================================
+=========================================
+Timestamp: 2022.12.05.20.57.42
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":49840,"adminID":"MTLA123","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.20.58.02
+
+Received request
+Received object for Multicast: {"participantID":"MTLP1111","eventID":"MTLA010123","sequenceNumber":1,"port":49844,"MethodName":"cancelTicket","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.136","Data":"The ticket is not present in the schedule.","Success":false}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Successfully canceled the ticket for eventId: MTLA010123","Success":true}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.136
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: Successfully canceled the ticket for eventId: MTLA010123
+=========================================
+=========================================
+Timestamp: 2022.12.05.20.58.53
+
+Received request
+Received object for Multicast: {"sequenceNumber":3,"port":61737,"adminID":"MTLA123","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 3
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.136","Data":"[{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]","Success":true}
+Timeout occured while waiting for responses
+Checking for Byzantine Failure
+Sending back the response to the Client: [{TORM010123=5:MTLP5555-TORP5555, TORA010123=0:TORP1111-TORP2222-MTLP3333-MTLP5555, TORE010123=10:VANP2222}, {VANE010123=10:VANP2222, VANM010123=5:MTLP5555-VANP5555, VANA010123=0:VANP2222-MTLP3333-MTLP5555}, {MTLA010123=0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555, MTLE010123=10:, MTLM010123=5:MTLP5555-TORP5555}]
+=========================================
+=========================================
+Timestamp: 2022.12.05.21.07.07
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":60851,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Timeout occured while waiting for responses
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123 0, MTLE010123 10, MTLM010123 5.
+=========================================
+=========================================
+Timestamp: 2022.12.05.21.07.57
+
+Received request
+Received object for Multicast: {"sequenceNumber":0,"port":49602,"adminID":"MTLA1234","MethodName":"listReservationSlotAvailable","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 0
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"MTLA010123 0, MTLE010123 10, MTLM010123 5.","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"MTLA010123\n\tcapacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]\nMTLE010122\n\tcapacity: 10 guests: N\/A\nMTLM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORM010123\n\tcapacity: 5 guests: [MTLP5555, TORP5555]\nTORA010123\n\tcapacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]\nTORE010123\n\tcapacity: 10 guests: [VANP2222]\nVANE010123\n\tcapacity: 10 guests: [VANP2222]\nVANM010123\n\tcapacity: 5 guests: [MTLP5555, VANP5555]\nVANA010123\n\tcapacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]\n","Success":true}
+Checking for Byzantine Failure
+Sending back the response to the Client: MTLA010123
+	capacity: 0 guests: [MTLP1111, MTLP2222, MTLP3333, MTLP4444, MTLP5555]
+MTLE010122
+	capacity: 10 guests: N/A
+MTLM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORM010123
+	capacity: 5 guests: [MTLP5555, TORP5555]
+TORA010123
+	capacity: 0 guests: [TORP1111, TORP2222, MTLP3333, MTLP5555]
+TORE010123
+	capacity: 10 guests: [VANP2222]
+VANE010123
+	capacity: 10 guests: [VANP2222]
+VANM010123
+	capacity: 5 guests: [MTLP5555, VANP5555]
+VANA010123
+	capacity: 0 guests: [VANP1111, VANP2222, MTLP3333, MTLP5555]
+
+=========================================
+=========================================
+Timestamp: 2022.12.05.21.08.23
+
+Received request
+Received object for Multicast: {"participantID":"MTLP1111","eventID":"MTLA010123","sequenceNumber":1,"port":59968,"MethodName":"cancelTicket","eventType":"ArtGallery","frontend-IP":"192.168.43.40"}
+Object multicasted with sequence number: 1
+Starting UDP Server to wait for responses
+Received Response from RM - 1: {"IP":"192.168.43.40","Data":"","Success":true}
+Received Response from RM - 2: {"IP":"192.168.43.210","Data":"Successfully canceled the ticket for eventId: MTLA010123","Success":true}
+Received Response from RM - 3: {"IP":"192.168.43.210","Data":"Unable to cancel ticket - MTLP1111 does not have a reservation for MTLA010123","Success":false}
+Checking for Byzantine Failure
+Byzantine Failure Found at Replica: 192.168.43.210
+Received object for Multicast: {"sequenceNumber":2,"MethodName":"restartReplicas"}
+Object multicasted with sequence number: 2
+Sending back the response to the Client: Successfully canceled the ticket for eventId: MTLA010123
+=========================================

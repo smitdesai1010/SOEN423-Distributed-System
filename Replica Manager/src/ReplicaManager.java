@@ -46,8 +46,8 @@ public class ReplicaManager {
             return;
         }
 
-        if (replicaImplementationNumber <= 0 || replicaImplementationNumber >= 4) {
-            logger.severe("Please select an implementation number between 1-3");
+        if (replicaImplementationNumber <= 0 || replicaImplementationNumber >= 5) {
+            logger.severe("Please select an implementation number between 1-4");
             return;
         }
         logger.info("Starting Replica Manager with implementation number [" + replicaImplementationNumber  + "] for replicas...");
@@ -113,8 +113,12 @@ public class ReplicaManager {
     }
 
     private static void handleFrontEndObject(JSONObject frontEndObject) throws IOException, ParseException {
+
+        System.out.println("Recevied Request from FrontEnd: " + frontEndObject.toString());
+
         if (frontEndObject.get(jsonFieldNames.METHOD_NAME).equals("restartReplicas"))  {
             logger.info("Restarting all replicas...");
+            ++nextSequenceNum;
             for (City c : City.values()) {
                 c.startProcess(replicaImplementationNumber);
             }

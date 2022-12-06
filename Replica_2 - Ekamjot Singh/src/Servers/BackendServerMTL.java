@@ -16,15 +16,15 @@ public class BackendServerMTL extends BackendServer {
 	public synchronized void loadEvents() {
 		_events = new HashMap<>();
 		_participantBookings = new HashMap<>();
-		_events.put("ArtGallary", new HashMap<>());
+		_events.put("ArtGallery", new HashMap<>());
 		_events.put("Concerts", new HashMap<>());
 		_events.put("Theatre", new HashMap<>());
 
-		_events.get("ArtGallary").put("MTLM010123", "5:MTLP5555-TORP5555");
-		updateParticipantBookings("MTLP5555-TORP5555", "ArtGallary", "MTLM010123");
-		_events.get("ArtGallary").put("MTLA010123", "0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555");
-		updateParticipantBookings("MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555", "ArtGallary", "MTLA010123");
-		_events.get("ArtGallary").put("MTLE010123", "10:");
+		_events.get("ArtGallery").put("MTLM010123", "5:MTLP5555-TORP5555");
+		updateParticipantBookings("MTLP5555-TORP5555", "ArtGallery", "MTLM010123");
+		_events.get("ArtGallery").put("MTLA010123", "0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555");
+		updateParticipantBookings("MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555", "ArtGallery", "MTLA010123");
+		_events.get("ArtGallery").put("MTLE010123", "10:");
 
 		_events.get("Concerts").put("MTLM020123", "80:MTLP2222");
 		updateParticipantBookings("MTLP2222", "Concerts", "MTLM020123");

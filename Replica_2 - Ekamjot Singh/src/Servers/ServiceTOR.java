@@ -437,7 +437,7 @@ public class ServiceTOR implements ServiceInterface{
 //        calendar.set(year, month, day);
 //        int weekNumber = calendar.get(Calendar.WEEK_OF_YEAR);
 //
-//        String temp = delegateTOR._participantBookings.get(participantID).get("ArtGallary");
+//        String temp = delegateTOR._participantBookings.get(participantID).get("ArtGallery");
 //        String bookings = temp == null ? "" : temp;
 //        temp = delegateTOR._participantBookings.get(participantID).get("Concerts");
 //        bookings += temp == null ? "" : temp;
