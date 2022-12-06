@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Crash Replica Jar">
+    <output-path>$PROJECT_DIR$/../Replica Manager/replica_implementations/impl4</output-path>
+    <root id="archive" name="Crash Replica Jar.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

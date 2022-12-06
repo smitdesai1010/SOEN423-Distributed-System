@@ -21,59 +21,112 @@ public class ServiceMTL implements ServiceInterface{
     @Override
     public JSONObject addReservationSlot(String eventID, String eventType, int capacity) {
         delegateMTL.log("REQUEST: addReservationSlot called for eventID " + eventID + " Type: " + eventType + " capacity: " + capacity);
-        if (!delegateMTL._events.containsKey(eventType)) {
+        if(eventID.substring(0,3).equals(delegateMTL._name)){
+            if (!delegateMTL._events.containsKey(eventType)) {
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "The reservation slot is already available");
+                delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            synchronized (this) {
+                if (delegateMTL._events.get(eventType) == null || delegateMTL._events.get(eventType).isEmpty()) {
+                    delegateMTL._events.put(eventType, new HashMap<String, String>());
+                    delegateMTL._events.get(eventType).put(eventID, Integer.toString(capacity));
+                    replyObjectJSON.put(SUCCESS, true);
+                    replyObjectJSON.put( DATA,
+                            "Reservation slot was successfully added for " + eventID + " " + eventType + " " + capacity);
+                    delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                    return replyObjectJSON;
+                }
+            }
+
             replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "The reservation slot is already available");
+            replyObjectJSON.put( DATA, "addReservation Request failed due to some internal error.");
+            delegateMTL.log(replyObjectJSON.get(DATA).toString());
+            return replyObjectJSON;
+        }
+        else {
+            String[] config = delegateMTL._allServers.get(eventID.substring(0, 3)).split(":");
+            String request = "addReservationSlot:"+ eventID + ":" + eventType + ":" + capacity;
+            ClientUDP udpClient = new ClientUDP(config[0], config[1], request);
+            udpClient.start();
+            try {
+                udpClient.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            ArrayList<String> s = ClientUDP._responses;
+            if (s.get(0).equals("true")) {
+                ClientUDP._responses.clear();
+                replyObjectJSON.put(SUCCESS, true);
+                replyObjectJSON.put( DATA, "The Reservation slot was removed successfully!");
+                delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+
+            }
+            replyObjectJSON.put(SUCCESS, false);
+            replyObjectJSON.put( DATA, "The Reservation slot was Not removed successfully!");
             delegateMTL.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
         }
 
-        synchronized (this) {
-            if (delegateMTL._events.get(eventType) == null || delegateMTL._events.get(eventType).isEmpty()) {
-                delegateMTL._events.put(eventType, new HashMap<String, String>());
-                delegateMTL._events.get(eventType).put(eventID, Integer.toString(capacity));
-                replyObjectJSON.put(SUCCESS, true);
-                replyObjectJSON.put( DATA,
-                        "Reservation slot was successfully added for " + eventID + " " + eventType + " " + capacity);
-                delegateMTL.log(replyObjectJSON.get(DATA).toString());
-                return replyObjectJSON;
-            }
-        }
-
-        replyObjectJSON.put(SUCCESS, false);
-        replyObjectJSON.put( DATA, "addReservation Request failed due to some internal error.");
-        delegateMTL.log(replyObjectJSON.get(DATA).toString());
-        return replyObjectJSON;
     }
 
     @Override
     public JSONObject removeReservationSlot(String eventID, String eventType) {
-        delegateMTL.log("REQUEST: removeReservationSlot: " + eventID + " " + eventType);
-        if (delegateMTL._events.get(eventType) == null || delegateMTL._events.get(eventType).isEmpty() ||
-                delegateMTL._events.get(eventType).get(eventID) == null ||
-                delegateMTL._events.get(eventType).get(eventID).isEmpty() )
-        {
-            replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "ERROR: Reservation Slot of type "+eventType + " and ID " + eventID +
-                                       " is not available.");
+        if(eventID.substring(0,3).equals(delegateMTL._name)){
+            delegateMTL.log("REQUEST: removeReservationSlot: " + eventID + " " + eventType);
+            if (delegateMTL._events.get(eventType) == null || delegateMTL._events.get(eventType).isEmpty() ||
+                    delegateMTL._events.get(eventType).get(eventID) == null ||
+                    delegateMTL._events.get(eventType).get(eventID).isEmpty() )
+            {
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "ERROR: Reservation Slot of type "+eventType + " and ID " + eventID +
+                        " is not available.");
+                delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            String[] eventDetails = delegateMTL._events.get(eventType).get(eventID).split(":");
+
+            if (eventDetails.length >= 2 && !eventDetails[1].isEmpty()) { // checking if someone already booked the slot
+                replyObjectJSON.put(SUCCESS, false);
+                replyObjectJSON.put( DATA, "ERROR: you cannot remove the slot since it is already booked by someone.");
+                delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
+
+            delegateMTL._events.get(eventType).remove(eventID);
+            replyObjectJSON.put(SUCCESS, true);
+            replyObjectJSON.put( DATA, "Reservation Slot is removed Successfully.");
             delegateMTL.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
         }
-
-        String[] eventDetails = delegateMTL._events.get(eventType).get(eventID).split(":");
-
-        if (eventDetails.length >= 2 && !eventDetails[1].isEmpty()) { // checking if someone already booked the slot
+        else {
+            String[] config = delegateMTL._allServers.get(eventID.substring(0, 3)).split(":");
+            String request = "removeReservationSlot:"+ eventID + ":" + eventType;
+            ClientUDP udpClient = new ClientUDP(config[0], config[1], request);
+            udpClient.start();
+            try {
+                udpClient.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            ArrayList<String> s = ClientUDP._responses;
+            if (s.get(0).equals("true")) {
+                ClientUDP._responses.clear();
+                replyObjectJSON.put(SUCCESS, true);
+                replyObjectJSON.put( DATA, "The Reservation Slot was removed Successfully.");
+                delegateMTL.log(replyObjectJSON.get(DATA).toString());
+                return replyObjectJSON;
+            }
             replyObjectJSON.put(SUCCESS, false);
-            replyObjectJSON.put( DATA, "ERROR: you cannot remove the slot since it is already booked by someone.");
+            replyObjectJSON.put( DATA, "Reservation Slot is not removed Successfully.");
             delegateMTL.log(replyObjectJSON.get(DATA).toString());
             return replyObjectJSON;
-        }
 
-        delegateMTL._events.get(eventType).remove(eventID);
-        replyObjectJSON.put(SUCCESS, true);
-        replyObjectJSON.put( DATA, "Reservation Slot is removed Successfully.");
-        delegateMTL.log(replyObjectJSON.get(DATA).toString());
-        return replyObjectJSON;
+        }
     }
 
     @Override

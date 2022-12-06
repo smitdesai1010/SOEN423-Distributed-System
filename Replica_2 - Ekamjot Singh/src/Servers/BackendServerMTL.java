@@ -19,15 +19,26 @@ public class BackendServerMTL extends BackendServer {
 		_events.put("ArtGallary", new HashMap<>());
 		_events.put("Concerts", new HashMap<>());
 		_events.put("Theatre", new HashMap<>());
-		_events.get("ArtGallary").put("MTLM051022", "100:MTLP1234");
-		updateParticipantBookings("MTLP1234", "ArtGallary", "MTLM051022");
-		_events.get("ArtGallary").put("MTLA102938", "100");
-		_events.get("Concerts").put("MTLM101022", "100:MTLP1276-MTLP9083");
-		updateParticipantBookings("MTLP1234", "Concerts", "MTLM101022");
-		updateParticipantBookings("MTLP9083", "Concerts", "MTLM101022");
-		_events.get("Concerts").put("MTLA102938", "100");
-		//_events.get("Theatre").put("MTLM101010", "100");
-		//_events.get("Theatre").put("MTLA102938", "100");
+
+		_events.get("ArtGallary").put("MTLM010123", "5:MTLP5555-TORP5555");
+		updateParticipantBookings("MTLP5555-TORP5555", "ArtGallary", "MTLM010123");
+		_events.get("ArtGallary").put("MTLA010123", "0:MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555");
+		updateParticipantBookings("MTLP1111-MTLP2222-MTLP3333-MTLP4444-MTLP5555", "ArtGallary", "MTLA010123");
+		_events.get("ArtGallary").put("MTLE010123", "10:");
+
+		_events.get("Concerts").put("MTLM020123", "80:MTLP2222");
+		updateParticipantBookings("MTLP2222", "Concerts", "MTLM020123");
+		_events.get("Concerts").put("MTLA020123", "1:MTLP4444-MTLP5555-VANP5555-VANP2222");
+		updateParticipantBookings("MTLP4444-MTLP5555-VANP5555-VANP2222", "Concerts", "MTLA020123");
+		_events.get("Concerts").put("MTLE020123", "5:VANP5555-VANP4444");
+		updateParticipantBookings("VANP5555-VANP4444", "Concerts", "MTLE020123");
+
+		_events.get("Theatre").put("MTLM030123", "80:MTLP2222-MTLP5555");
+		updateParticipantBookings("MTLP2222-MTLP5555", "Theatre", "MTLM030123");
+		_events.get("Theatre").put("MTLA030123", "1:MTLP4444-MTLP5555-VANP5555-VANP2222");
+		updateParticipantBookings("MTLP4444-MTLP5555-VANP5555-VANP2222", "Theatre", "MTLA030123");
+		_events.get("Theatre").put("MTLE030123", "5:VANP5555-VANP2222");
+		updateParticipantBookings("VANP5555-VANP2222", "Theatre", "MTLE030123");
 	}
 	
 	
