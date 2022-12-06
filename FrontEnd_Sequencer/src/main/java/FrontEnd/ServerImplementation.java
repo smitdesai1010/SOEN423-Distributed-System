@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class ServerImplementation implements ServerInterface {
 
+    public final int SOCKET_TIMEOUT = 7000;
+    public final int TOTAL_RM       = 3;
     // Note: SOAP spins up a new thread automatically to handle mulitple concurrent requests
     @Override
     public String executeRequest(String jsonString) {
@@ -82,16 +85,25 @@ public class ServerImplementation implements ServerInterface {
         JSONParser parser = new JSONParser();
         logger.addToLogs("Starting UDP Server to wait for responses");
 
-        while (responseData.size() < 3) {
-            byte[] requestByteArray = new byte[50000];
-            DatagramPacket request = new DatagramPacket(requestByteArray, requestByteArray.length);
-            aSocket.receive(request);
+        aSocket.setSoTimeout(SOCKET_TIMEOUT);
 
-            String requestString = new String(request.getData()).trim();
-            JSONObject requestObject = (JSONObject) parser.parse(requestString);
+        while (responseData.size() < TOTAL_RM) {
+            try {
+                byte[] requestByteArray = new byte[50000];
+                DatagramPacket request = new DatagramPacket(requestByteArray, requestByteArray.length);
+                aSocket.receive(request);
 
-            logger.addToLogs("Received Response from RM - "+ (responseData.size() + 1) +": " + requestObject.toString());
-            responseData.add(requestObject);
+                String requestString = new String(request.getData()).trim();
+                JSONObject requestObject = (JSONObject) parser.parse(requestString);
+
+                logger.addToLogs("Received Response from RM - "+ (responseData.size() + 1) +": " + requestObject.toString());
+                responseData.add(requestObject);
+            }
+
+            catch (SocketTimeoutException e) {
+                logger.addToLogs("Timeout occured while waiting for responses");
+                break;
+            }
         }
 
         aSocket.close();
