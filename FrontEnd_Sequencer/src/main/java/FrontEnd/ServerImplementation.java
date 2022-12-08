@@ -19,7 +19,7 @@ import java.util.List;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class ServerImplementation implements ServerInterface {
 
-    public final int SOCKET_TIMEOUT = 7000;
+    public final int SOCKET_TIMEOUT = 9000;
     public final int TOTAL_RM       = 3;
     // Note: SOAP spins up a new thread automatically to handle mulitple concurrent requests
     @Override
@@ -102,7 +102,9 @@ public class ServerImplementation implements ServerInterface {
 
             catch (SocketTimeoutException e) {
                 logger.addToLogs("Timeout occured while waiting for responses");
-                break;
+                if (responseData.size() > 0) {
+                    break;
+                }
             }
         }
 
