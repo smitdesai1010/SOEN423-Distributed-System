@@ -109,7 +109,7 @@ public class Server {
                     }
                     case "listReservationSlotAvailable": {
                         EventType eventType = jsonStringEventTypeToEnum((String) clientRequestObject.get(jsonFieldNames.EVENT_TYPE));
-                        replyString = eventMapToReservationSlotAvailableCount(cityReservationSystem.getEventMap(), eventType);
+                        replyString = cityReservationSystem.listReservationSlotsAvailable(eventType);
                         break;
                     }
                     case "reserveTicket": {
